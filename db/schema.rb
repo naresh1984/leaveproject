@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927112414) do
+ActiveRecord::Schema.define(:version => 20130927115215) do
 
   create_table "admin_high_scores", :force => true do |t|
     t.string   "game"
@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(:version => 20130927112414) do
 
   create_table "leaves", :force => true do |t|
     t.integer "employee_id"
-    t.decimal "els",         :precision => 10, :scale => 0
-    t.decimal "nels",        :precision => 10, :scale => 0
-    t.decimal "lops",        :precision => 10, :scale => 0
-    t.decimal "compoffs",    :precision => 10, :scale => 0
-    t.decimal "is_special",  :precision => 10, :scale => 0
+    t.float   "els"
+    t.float   "nels"
+    t.float   "lops"
+    t.float   "compoffs"
+    t.float   "is_special"
     t.integer "createdby"
     t.integer "modifiedby"
   end
