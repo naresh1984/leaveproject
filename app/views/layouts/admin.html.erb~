@@ -1,0 +1,4 @@
+<%= render 'layouts/header_admin' %>
+<%= yield %>
+<%= render 'layouts/footer' %>
+

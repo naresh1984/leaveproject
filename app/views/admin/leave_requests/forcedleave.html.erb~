@@ -1,0 +1,101 @@
+<section id="body">
+  <div class="container">
+    <div class="col12">
+
+    	<table class="width_full" style="border:solid 1px #0d5478;">
+         
+<tr>
+            	<td>
+ <%= form_tag  admin_forcedleave_path , :method => :get do %>
+                    <table align="center">
+                      <tr><td align="center"><h1>Search Employees</h1></td></tr>
+                      <tr><td>
+<%= label_tag :empid, 'By Emp ID:' %> <%= text_field_tag :empid, params[:empid] %> <%= label_tag :first_name, ' / Name:' %>
+                <%= text_field_tag :first_name, params[:first_name] %>
+
+</td></tr>				  
+                      <tr><td align="center"><%= submit_tag 'Submit',:class=>'button' %></td></tr>
+                    </table> 
+  <% end %>               
+                </td>
+               
+            </tr>	
+            <tr>
+            	<td colspan="2">
+                	
+		<table class="table1 width_full">
+				  <tbody>
+                  <tr>
+                  	<td rowspan="2" align="center"><strong>Emp ID</strong></td>
+                    <td rowspan="2" align="center"><strong>Name</strong></td>
+                    <td rowspan="2" align="center"><strong>Email</strong></td>
+                    <th colspan="2">Available</th>
+                    <th colspan="2">Incurred</th>
+                    <th rowspan="2" align="center"><strong>Options</strong></th>
+                  </tr>
+                  <tr>
+		 <th>ELs</th>
+                 <th>NELs</th>	
+		 <th>LOPs</th>
+                 <th>Comp Offs</th>						
+		 </tr>
+				  <% @employees.each do |employee| %>
+				
+				  <tr>
+					<td height="30px;"><%= employee.empid %></td>
+					<td><%= employee.first_name.capitalize+" "+employee.last_name.capitalize %></td>
+					<td><%= employee.leafe.employee.email %></td>
+                                        <td><%= number_to_human(employee.leafe.els) %></td>
+					<td><%= number_to_human(employee.leafe.nels) %></td>
+					<td><%= number_to_human(employee.leafe.lops) %></td>
+					<td><%= number_to_human(employee.leafe.compoffs) %></td>
+					<td>
+ <%= link_to 'Add Forced Leave', '#' ,:class=>'button',:onclick =>"return popupwindow('#{admin_addforcedleave_path(:id=>employee)}','',1000,400); refreshParent();" %>
+
+				 </td>
+				  </tr>	
+	<% end %>
+
+
+	                      <%  if @employees.count>10 %>
+				<tr>
+				  <td colspan="8" align="center">
+				    <%= will_paginate @employees, renderer: BootstrapPagination::Rails %>                    
+				  </td>
+				</tr>
+				<% end %>
+				<% if @employees.empty? %>
+				<tr>
+				  <td colspan="8" align="center">No Records Found</td>
+				</tr>
+				<% end %>
+
+				
+
+				 
+				</tbody></table>                	
+                </td>
+            </tr>
+        </table>	
+
+    
+    </div>
+  </div>
+</section>
+<script>
+
+
+
+function popupwindow(url, title, w, h) {
+  var left = (screen.width/3)-(w/3);
+  var top = (screen.height/2)-(h/2);
+  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+} 
+
+
+
+</script>
+
+
+
+

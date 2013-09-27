@@ -1,0 +1,107 @@
+
+
+<section id="body">
+  <div class="container">
+    <div class="col12">
+
+    	<table class="width_full" style="border:solid 1px #0d5478;">
+         
+<tr>
+            	<td>
+ <%= form_tag  admin_employees_path , :method => :get do %>
+                    <table align="center">
+                      <tr><td align="center"><h1>Search Employees</h1></td></tr>
+                      <tr><td>
+<%= label_tag :empid, 'By Emp ID:' %> <%= text_field_tag :empid, params[:empid] %> <%= label_tag :first_name, ' / Name:' %>
+                <%= text_field_tag :first_name, params[:first_name] %>
+
+</td></tr>				  
+                      <tr><td align="center"><%= submit_tag 'Submit',:class=>'button' %></td></tr>
+                    </table> 
+  <% end %>               
+                </td>
+                <td align="right">
+
+
+                <table width="75%" border="0" cellpadding="0" cellspacing="0" 
+					<tr>
+						
+						<td align="right">
+
+
+
+
+<%= link_to "Add Employee", new_admin_employee_path, :class => "button" %>
+
+					</tr>
+				</table>  
+     
+
+                	
+                </td>
+            </tr>	
+            <tr>
+            	<td colspan="2">
+                	
+		<table class="table1 width_full">
+				  <tbody>
+                  <tr>
+                  	<td rowspan="2" align="center"><strong>Emp ID</strong></td>
+                    <td rowspan="2" align="center"><strong>Name</strong></td>
+                    <th colspan="2">Available</th>
+                    <th colspan="2">Incurred</th>
+                    <th rowspan="2" align="center"><strong>Options</strong></th>
+                  </tr>
+                  <tr>
+		 <th>ELs</th>
+                 <th>NELs</th>	
+		 <th>LOPs</th>
+                 <th>Comp Offs</th>						
+		 </tr>
+				  <% @employees.each do |employee| %>
+				
+				  <tr>
+					<td height="30px;"><%= employee.employee.empid %></td>
+					<td><%= employee.employee.first_name.capitalize+" "+employee.employee.last_name.capitalize %></td>
+					<td><%= number_to_human(employee.els) %></td>
+					<td><%= number_to_human(employee.nels) %></td>
+					<td><%= number_to_human(employee.lops) %></td>
+					<td><%= number_to_human(employee.compoffs) %></td>
+					<td>
+                                        <%= link_to 'View/Edit Details', edit_admin_employee_path(employee.employee_id), :class=>'button' %>
+					<%= link_to 'View Applied Leaves', admin_applied_leaves_path(:id=>employee.employee_id), :class=>'button' %>
+					<%= link_to 'Edit Leaves', edit_admin_leafe_path(employee.employee_id), :class=>'button' %>
+                                        <%= link_to 'Delete', admin_employee_path(employee.employee_id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'button' %>
+                                       </td>
+				  </tr>	
+	<% end %>                
+				<%  if @employees.count>10 %>
+				<tr>
+				  <td colspan="7" align="center">
+				    <%= will_paginate @employees, renderer: BootstrapPagination::Rails %>                    
+				  </td>
+				</tr>
+				<% end %>
+				<% if @employees.empty? %>
+				<tr>
+				  <td colspan="7" align="center">No Records Found</td>
+				</tr>
+				<% end %>
+
+				
+
+				 
+				</tbody></table>                	
+                </td>
+            </tr>
+        </table>	
+
+    
+    </div>
+  </div>
+</section>
+
+
+
+
+

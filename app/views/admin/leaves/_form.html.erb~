@@ -1,0 +1,58 @@
+
+<section id="body">
+  <div class="container">
+    <div class="col12">
+    
+	<%= form_for @leafe , :url => @leafe.new_record? ? admin_leave_requests_path:  admin_leafe_path, :html => {:name => 'new_leave_request'} do |f| %>
+    	<table class="width_full" style="border:solid 1px #0d5478;">
+        	<tr>
+            	<td>
+                	<table align="center">
+                        <tr>
+                            <td colspan="2" align="center">
+                            <h1><%= @employee.first_name.capitalize+' '+@employee.last_name.capitalize+' - '+@employee.empid.capitalize %></h1>
+                            </td>
+                        </tr>
+                       <% if flash[:notice] %>
+			<tr>
+                        <td colspan="2" align="center"><h1><%= flash[:notice] %> </h1></td>			
+			</tr>
+                       <% end %>
+                        <tr>
+                            <td align="center"> <%= f.label :els %></td>
+                            <td align="left"> <%= f.text_field :els %></td>
+                        </tr>
+                        <tr>
+                            <td align="center"> <%= f.label :nels %></td>
+                            <td align="left"><%= f.text_field :nels %></td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2"> <%= f.submit 'Submit', :class=>'button' %></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>         
+	
+<% end %>
+    </div>
+  </div>
+</section>
+
+
+
+
+	
+   <div class="field">
+   <br />
+   
+  </div>
+  <div class="field">
+   <br />
+    
+  </div>
+ 
+  <div class="actions">
+   
+  </div>
+

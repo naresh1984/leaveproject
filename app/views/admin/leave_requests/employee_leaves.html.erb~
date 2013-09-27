@@ -1,0 +1,142 @@
+<section id="body">
+  <div class="container">
+
+    <%= form_tag employee_leaves_path,:id=>'search_employee', :name=>'search_employee',:method => :get do %>
+        <table class="table2 width_auto" align="center">
+          <tr><td align="center"><h1>Search Employee Leaves</h1></td></tr>
+          <tr>
+            <td>
+              <div class="search">
+                <%= label_tag :empid, 'By Emp ID:' %>
+                <%= text_field_tag :empid, params[:empid] %>
+              </div>
+              <div class="search">
+                <%= label_tag :first_name, 'Name:' %>
+                <%= text_field_tag :first_name, params[:first_name] %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="middle">
+              <div class="search">
+                <%= label_tag :Fromdate, 'From:' %>
+                <%= text_field_tag :fromdate, params[:fromdate],readonly: true%>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fStartPop(document.search_employee.fromdate,document.search_employee.todate);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+
+              </div>
+              <div class="search">
+                <%= label_tag :Todate, 'To:' %>
+                <%= text_field_tag :todate, params[:todate],readonly: true %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fEndPop(document.search_employee.fromdate,document.search_employee.todate);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+                </div>
+
+          </tr>
+          <tr>
+          <td align="center">
+            <%= submit_tag "Submit",:class => "button" %>
+            <%= button_tag 'Reset', :type => 'reset',:class => "button" %>
+
+          </td>
+        </tr>
+
+
+         </table>
+        <iframe width=132 height=142 name="gToday:contrast:agenda.js" id="gToday:contrast:agenda.js" src="/assets/daterange/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>
+
+  <% end %>
+
+
+    <h2>Pending Requests</h2>
+    <table class="table1 width_full">
+      <tbody><tr>
+        <th class="tabTitle"><strong>S.No.</strong></th>
+        <th class="tabTitle"><strong>Emp Id</strong></th>
+        <th class="tabTitle"><strong>Name</strong></th>
+        <th class="tabTitle"><strong>Leave From</strong></th>
+        <th class="tabTitle"><strong>Leave To</strong></th>
+        <th class="tabTitle"><strong>No. of Working Days</strong></th>
+        <th class="tabTitle"><strong>Resume on</strong></th>
+        <th class="tabTitle"><strong>Status</strong></th>
+        <th class="tabTitle"><strong>View / Edit / Approve</strong></th>
+      </tr>
+      <% i = 1 %>
+      <% @leave_requests_pending.each do |leave_request_pending| %>
+          <tr>
+            <td height="25"><%= i %></td>
+            <td><%= leave_request_pending.employee.empid.capitalize %></td>
+            <td><%= leave_request_pending.employee.first_name.capitalize %></td>
+            <td><%= leave_request_pending.fromdate.strftime("%d-%m-%Y") %></td>
+            <td><%= leave_request_pending.todate.strftime("%d-%m-%Y") %></td>
+            <td><%= leave_request_pending.numdays %></td>
+            <td><%= leave_request_pending.resumeon.strftime("%d-%m-%Y") %></td>
+            <td>Pending</td>
+            <td><%= link_to "View / Edit / Approve",leave_approve_path(:id=>leave_request_pending),:class=>'button' %></td>
+          </tr>
+          <% i += 1 %>
+      <% end %>
+      <% if @leave_requests_pending.empty? %>
+          <tr>
+            <td colspan="9" align="center">No Records Found</td>
+          </tr>
+      <% else %>
+          <tr>
+            <td colspan="9" align="center">
+              <%= will_paginate @leave_requests_pending, renderer: BootstrapPagination::Rails %>
+              <%= page_entries_info @leave_requests_pending %>
+            </td>
+          </tr>
+      <% end %>
+
+
+      </tbody></table>
+    <h2>Employees on Leave</h2>
+    <table class="table1 width_full">
+      <tbody><tr>
+        <th class="tabTitle"><strong>S.No.</strong></th>
+        <th class="tabTitle"><strong>Emp Id</strong></th>
+        <th class="tabTitle"><strong>Name</strong></th>
+        <th class="tabTitle"><strong>Leave From</strong></th>
+        <th class="tabTitle"><strong>Leave To</strong></th>
+        <th class="tabTitle"><strong>No. of Working Days</strong></th>
+        <th class="tabTitle"><strong>Resume on</strong></th>
+        <th class="tabTitle"><strong>Contact No</strong></th>
+        <th class="tabTitle"><strong>Edit / Cancel</strong></th>
+      </tr>
+      <% z = 1 %>
+      <% @leave_requests_approve.each do |leave_request_approve| %>
+
+          <tr>
+            <td height="25"><%= z %></td>
+            <td><%= leave_request_approve.employee.empid.capitalize %><%= @leave_requests_approve.count %></td>
+            <td><%= leave_request_approve.employee.first_name.capitalize %></td>
+            <td><%= leave_request_approve.fromdate.strftime("%d-%m-%Y") %></td>
+            <td><%= leave_request_approve.todate.strftime("%d-%m-%Y") %></td>
+            <td><%= leave_request_approve.numdays %></td>
+            <td><%= leave_request_approve.resumeon.strftime("%d-%m-%Y") %></td>
+            <td><%= leave_request_approve.employee.contact_no %><%= @leave_requests_pending.count-1 %></td>
+            <td><%= link_to "Edit / Cancel",leave_approve_path(:id=>leave_request_approve),:class=>'button' %></td>
+          </tr>
+          <% z += 1 %>
+      <% end %>
+
+
+      <% if @leave_requests_approve.empty? %>
+          <tr>
+            <td colspan="9" align="center">No Records Found</td>
+          </tr>
+      <% else %>
+              <tr>
+                <td colspan="9" align="center">
+                  <%= will_paginate @leave_requests_approve, renderer: BootstrapPagination::Rails %>
+                  <%= page_entries_info @leave_requests_approve %>
+
+                </td>
+              </tr>
+      <% end %>
+
+
+      </tbody></table>
+
+  </div>
+</section>
+

@@ -1,0 +1,25 @@
+<h1>Listing admin_high_scores</h1>
+
+<table>
+  <tr>
+    <th>Game</th>
+    <th>Score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_high_scores.each do |admin_high_score| %>
+  <tr>
+    <td><%= admin_high_score.game %></td>
+    <td><%= admin_high_score.score %></td>
+    <td><%= link_to 'Show', admin_high_score %></td>
+    <td><%= link_to 'Edit', edit_admin_high_score_path(admin_high_score) %></td>
+    <td><%= link_to 'Destroy', admin_high_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New High score', new_admin_high_score_path %>

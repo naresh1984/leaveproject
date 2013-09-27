@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  leave_id: 1
+  els: 1.5
+  nels: 1.5
+  lops: 1.5
+  compoffs: 1.5
+  processed_by: 1
+
+two:
+  leave_id: 1
+  els: 1.5
+  nels: 1.5
+  lops: 1.5
+  compoffs: 1.5
+  processed_by: 1

@@ -1,0 +1,107 @@
+<%= form_for @leave_request , :html => {:name => 'new_leave_request'} do |f| %>
+  <% if @leave_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@leave_request.errors.count, "error") %> prohibited this leave_request from being saved:</h2>
+
+      <ul>
+      <% @leave_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <section id="body">
+      <div class="container">
+        <div class="col7">
+          <table class="width_full">
+            <tr>
+              <td valign="top"> <%= f.label :From %></td>
+              <td>
+                <%= f.text_field :fromdate,:readonly => true,:class => 'required' %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fStartPop(document.new_leave_request.leave_request_fromdate,document.new_leave_request.leave_request_todate);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :TO %></td>
+              <td>
+                <%= f.text_field :todate, :readonly => true, :class => 'required' %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fEndPop(document.new_leave_request.leave_request_fromdate,document.new_leave_request.leave_request_todate);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :"No of Working Days" %></td>
+              <td>
+                <%= f.text_field :numdays, :value=> @leave_request[:numdays] || '0.5,1,1.5 etc' , :class => 'number', :onblur=>"if(this.value == '') {this.value = '0.5,1,1.5 etc'; this.style.color = '#cccccc'; }", :onfocus=>"if(this.value == '0.5,1,1.5 etc' ) { this.value=''; this.style.color = '#000000'; }" %>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :'Resume on' %></td>
+              <td>
+                <%= f.text_field :resumeon, :readonly => true, :class => 'required' %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fEndPop(document.new_leave_request.leave_request_todate,document.new_leave_request.leave_request_resumeon);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :"Reason" %></td>
+              <td>
+                <%= f.text_area :reason,:class => 'required' %>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :"Address" %></td>
+              <td>
+                <%= f.text_area :address,:class => 'required' %>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :"Contact No" %></td>
+              <td>
+                <%= f.text_field :contactno,:class => 'required' %>
+            </tr>
+            <tr>
+              <td valign="top"> <%= f.label :"Project / Practice" %></td>
+              <td>
+                <%= f.text_field :currentproject,:class => 'required' %>
+                <%= f.text_field :employee_id , :value=>session[:user_id],:type=>"hidden" %>
+            </tr> 
+              <tr>
+              <td valign="top"> <%= f.label :"Manager" %></td>
+              <td>
+  <% cities_array = @manager_list.all.map { |employee| [employee.first_name.capitalize+' '+employee.last_name.capitalize, employee.id] } %>
+<%= select_tag(:manager_id,  options_for_select(cities_array , params[:manager_id] ||  @employees.manager_id) ) %>          
+                
+            </tr> 
+            <tr>
+              <td valign="top"></td>
+              <td>
+                <%= submit_tag "Submit",:class => "button" %><%= link_to 'Back', leave_requests_path,html_options = {:class => "button"} %></td>
+            </tr>
+
+            </table>
+
+        </div>
+      </div>
+
+
+
+    <iframe width=132 height=142 name="gToday:contrast:agenda.js" id="gToday:contrast:agenda.js" src="/assets/daterange/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>
+
+<% end %>
+<div class="col5">
+     <%= render 'layouts/employee_module' %>
+    
+  </div>
+
+</section>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+        $("#new_leave_request").validate({
+            rules: {
+                role: {
+                    required: true,
+                    minlength:1,
+                }
+
+            }
+        });
+    });
+</script>

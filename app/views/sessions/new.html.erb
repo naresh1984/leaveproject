@@ -1,0 +1,38 @@
+
+<section id="body">
+  <div class="container"> 
+
+
+ <% if flash[:alert] %>
+<ul class="errors">
+            <li>
+              <td colspan="2" align="center"> <p id="notice"><%= flash[:alert] %></p></td>
+            </li>
+</ul>
+        <% end %>
+
+
+
+<%= form_tag do %>
+    <div style="background:#f9f9f9; border:solid 1px #0d5478; padding:30px; margin:0 auto; border-radius:10px;" class="login">
+
+      <table class="table2 login">
+        <tbody>      
+
+        <tr>
+          <td><%= label_tag :email, 'Username:' %></td>
+          <td><%= text_field_tag :email, params[:email] %></td>
+        </tr>
+        <tr>
+          <td><%= label_tag :name, 'Password:' %></td>
+          <td> <%= password_field_tag :password, params[:password] %></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><%= submit_tag "Submit",:class => "button" %></td>
+        </tr>
+        </tbody></table>
+    </div>
+    <% end %>
+  </div>
+</section>

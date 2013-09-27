@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  employee_id: 1
+  els: 1
+  nels: 1
+  lops: 1
+  compoffs: 1
+  is_special: MyString
+  createdby: 1
+  modifiedby: 1
+
+two:
+  employee_id: 1
+  els: 1
+  nels: 1
+  lops: 1
+  compoffs: 1
+  is_special: MyString
+  createdby: 1
+  modifiedby: 1

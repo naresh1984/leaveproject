@@ -1,0 +1,107 @@
+
+<section id="body">
+  <div class="container">
+    <div class="col12">
+      <%= form_tag leave_requests_path, :method => :get do %>
+
+          <table class="width_full" style="border:solid 1px #0d5478;">
+
+            <tr>
+              <td colspan="7">
+
+                <table width="100%" >
+                  <tr>
+                    <td>  <h2><%= params[:status_search] || 'Approved' %> Leaves <% if @leave_requests.count!=0 %>(<%= @leave_requests.count %>)<% end %></h2>
+                    </td>
+                    <td align="right">
+                      <%= select_tag(:status_search, options_for_select([['All', 'All'],['Pending', 'Pending'], ['Approved', 'Approved'],['Rejected', 'Rejected'], ['Cancelled', 'Cancelled'], ['Commited', 'Commited']], params[:status_search] || 'Approved'),:onchange => 'this.form.submit()') %>
+                    </td>
+                  </tr>
+                </table>
+      <% end %>
+      </td>
+      </tr>
+          <tr>
+            <td colspan="2">
+              <table class="table1 width_full">
+                <tbody><tr>
+                  <th class="tabTitle"><strong>S.No.</strong></th>
+                  <th class="tabTitle"><strong>From</strong></th>
+                  <th class="tabTitle"><strong>To</strong></th>
+                  <th class="tabTitle"><strong>No. of Working Days</strong></th>
+                  <th class="tabTitle"><strong>Type of Leaves</strong></th>
+                  <th class="tabTitle"><strong>Status</strong></th>
+                  <th class="tabTitle" style="padding-left:20px; padding-right:20px"><strong>Options</strong></th>
+                </tr>
+                <% i=1 %>
+                <% @leave_requests.each do |leave_request| %>
+                <tr>
+                  <td><%= i %></td>
+                  <td><%= leave_request.fromdate.strftime("%d-%m-%Y") %></td>
+                  <td><%= leave_request.todate.strftime("%d-%m-%Y") %></td>
+                  <td><%= leave_request.numdays %></td>
+                  <td>
+                  <% if leave_request.els.nil? %>
+                  --
+                  <% else %>
+                  <% if  leave_request.els !=0.0 %>
+                  ELs <%= number_to_human(leave_request.els) %>
+                  <% end %> 
+                  <% if leave_request.nels!=0.0 %>
+                  NEls <%= number_to_human(leave_request.nels) %>
+                  <% end %> 
+                  <% if  leave_request.lops!=0.0%>
+                  Lops <%= number_to_human(leave_request.lops) %>
+                  <% end %> 
+                  <% if  leave_request.compoffs!=0.0 %>
+                  Compoffs <%= number_to_human(leave_request.compoffs) %>
+                  <% end %> 
+                  <% end %>  
+                  </td>
+                  <td><%= leave_request.status %></td>
+                  <td align="center">
+                    <% if Date.today<=leave_request.todate == true and  leave_request.status!='Cancelled' and  leave_request.status!='Rejected' and  leave_request.status!='Commited' and  leave_request.status!='Pending'  and  leave_request.status=='Approved' %>
+                    <a onClick="return confirm('Please contact your reporting manager to edit this leave.');"><%= image_tag("view_edit.png", alt: "View/Edit" , title:"View/Edit") %></a>
+                    <% end %>
+
+                    <% if Date.today<=leave_request.todate == true and  leave_request.status=='Pending' %>
+                        <a href="<%= edit_leave_request_path(leave_request) %>" ><%= image_tag("view_edit.png", alt: "View/Edit" , title:"View/Edit") %></a>
+                    <% end %>
+                    <% if Date.today<=leave_request.todate == true and  (leave_request.status=='Approved' || leave_request.status=='Pending') %>
+                    <%= link_to (image_tag "cancel.png", :title => 'Cancel'),leave_cancel_path(:id=>leave_request) ,:confirm => "Are you sure u want to cancel this leave?"  %>
+
+                    <% end %>
+
+
+                  </td>
+                </tr>
+                <% i+=1 %>
+                <% end %>
+                <%  if @leave_requests.count>10 %>
+                <tr>
+                  <td colspan="7" align="center">
+                    <%= will_paginate @leave_requests, renderer: BootstrapPagination::Rails %>
+                    <%= page_entries_info @leave_requests %>
+                  </td>
+                </tr>
+                <% end %>
+                <% if @leave_requests.empty? %>
+                <tr>
+                  <td colspan="7" align="center">No Records Found</td>
+                </tr>
+                <% end %>
+
+
+                </tbody></table>
+            </td>
+          </tr>
+        </table>
+
+
+    </div>
+  </div>
+
+</section>
+
+
+

@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  employee_id: 1
+  preels: 1.5
+  prenels: 1.5
+  prelops: 1.5
+  precompoffs: 1.5
+  currentels: 1.5
+  currentnels: 1.5
+  currentlops: 1.5
+  currentcompoffs: 1.5
+  tableorscreen: MyString
+  tableid: 1
+  premodifiedby: 1
+  recentmodifiedby: 1
+
+two:
+  employee_id: 1
+  preels: 1.5
+  prenels: 1.5
+  prelops: 1.5
+  precompoffs: 1.5
+  currentels: 1.5
+  currentnels: 1.5
+  currentlops: 1.5
+  currentcompoffs: 1.5
+  tableorscreen: MyString
+  tableid: 1
+  premodifiedby: 1
+  recentmodifiedby: 1

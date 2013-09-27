@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Employee:</b>
+  <%= @leave_request.employee_id %>
+</p>
+
+<p>
+  <b>Fromdate:</b>
+  <%= @leave_request.fromdate %>
+</p>
+
+<p>
+  <b>Todate:</b>
+  <%= @leave_request.todate %>
+</p>
+
+<p>
+  <b>Numdays:</b>
+  <%= @leave_request.numdays %>
+</p>
+
+<p>
+  <b>Resumeon:</b>
+  <%= @leave_request.resumeon %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%= @leave_request.reason %>
+</p>
+
+<p>
+  <b>Contactno:</b>
+  <%= @leave_request.contactno %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @leave_request.address %>
+</p>
+
+<p>
+  <b>Currentproject:</b>
+  <%= @leave_request.currentproject %>
+</p>
+
+<p>
+  <b>Managerid:</b>
+  <%= @leave_request.managerid %>
+</p>
+
+<p>
+  <b>Remarks:</b>
+  <%= @leave_request.remarks %>
+</p>
+
+<p>
+  <b>Createdby:</b>
+  <%= @leave_request.createdby %>
+</p>
+
+<p>
+  <b>Modifiedby:</b>
+  <%= @leave_request.modifiedby %>
+</p>
+
+
+<%= link_to 'Edit', edit_leave_request_path(@leave_request) %> |
+<%= link_to 'Back', leave_requests_path %>

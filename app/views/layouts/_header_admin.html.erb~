@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Employee - <%= controller.action_name %></title>
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <%= javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js" %>
+
+
+
+  <![endif]-->
+
+</head>
+<body>
+<header>
+  <div class="container">
+    <section class="userdetails">
+	<span class="fleft"><strong><%= session[:first_name].capitalize %> <%= session[:last_name].capitalize %> - <%= session[:user_empid] %></strong></span>
+       <%= link_to 'Sign Out', logout_path, method: :delete, :class => "button fright" %></section>
+  	<h1 id="logo"><%= link_to "", admin_employees_path%></h1>
+  </div>
+  <nav class="clearfix">
+  	<div class="container">
+        <ul id="menu" class="clearfix">
+            <li ><%= link_to 'Employees' ,admin_employees_path %></li>
+            <li ><%= link_to 'Leaves' ,admin_leave_requests_path %></li>
+            <li ><%= link_to 'Forced Leaves' ,admin_forcedleave_path %></li>           
+        </ul>
+        <a href="#" id="pull"><span>Menu</span></a>
+    </div>
+  </nav>
+</header>

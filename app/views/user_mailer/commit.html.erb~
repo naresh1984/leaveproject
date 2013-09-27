@@ -1,0 +1,59 @@
+ <% if @leave_heading=='Request For Leave'%>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;"><strong>Hi <%= @manager.first_name  %> <%= @manager.last_name  %></strong>
+</p>
+ <% else %>
+     <p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;"><strong>Hi</strong></p>
+<% end %>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border: 1px solid rgb(174, 174, 174); border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
+  <tbody>
+  <tr>
+    <th colspan="2" style="text-align: left; background-color: rgb(204, 204, 204); padding: 5px; background-position: initial initial; background-repeat: initial initial;" height="10"><%= @leave_heading %></th>
+  </tr> 
+  <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10">Leave From - To:</th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= @leave_requests.fromdate.strftime("%d-%m-%Y") %> to <%= @leave_requests.todate.strftime("%d-%m-%Y") %></td>
+  </tr>
+  <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10">No. of Working Days:</th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= @leave_requests.numdays %></td>
+  </tr>
+ 
+<%  @leafe.each do |k,l| %>
+ <% if l!='' %>
+ <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10"><%= k.capitalize %></th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= number_to_human(l) %></td>
+  </tr>
+<% end %>
+<% end %>
+
+
+  
+  <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10">Reason:</th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= @leave_requests.reason %></td>
+  </tr>
+  <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10">Project / Practice:</th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= @leave_requests.currentproject %></td>
+  </tr> 
+  <tr>
+    <th style="border: 1px solid rgb(174, 174, 174); text-align: left; padding: 5px;" height="10">Status</th>
+    <td style="border: 1px solid rgb(174, 174, 174); padding: 5px;" height="10"><%= @leave_requests.status %></td>
+  </tr>
+  </tbody>
+</table>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
+  <strong>Note:</strong>
+  Please
+  <a href="http://183.82.1.3:8090/olm/manager/employeeLeaves" style="text-decoration: underline;" target="_blank">click here</a>
+  for more details.
+  <br/>
+  <br/>
+  <strong>
+    Thank you,
+    <br/>
+    OLM
+  </strong>
+</p>

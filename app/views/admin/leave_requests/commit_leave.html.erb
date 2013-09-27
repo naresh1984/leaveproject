@@ -1,0 +1,134 @@
+<section id="body">
+  <div class="container">
+    <div class="col12">
+ <%= form_for @employee , :url => @employee.new_record? ? admin_leave_requests_path: admin_leave_request_commit_path(:id=>params[:id], :path=>params[:path]), :html => {:name => 'new_leave_request'},:method=>'post' do |f| %>
+    	<table class="width_full" style="border:solid 1px #0d5478;">
+            <tr>
+            	<td width="60%">
+                  <h1>Commit Leave</h1>
+                  <table class="table2 width_full" style="border:solid 1px #0d5478;">
+                    <tr>
+                      <td colspan="2" class="tabTitle"><strong><%= @employee.first_name.capitalize+" "+@employee.last_name.capitalize+" - "+@employee.empid %></strong></td>
+                    </tr>
+                    <tr>
+                      <td>From:</td>
+                      <td><%= @leave_request.fromdate.strftime("%d-%m-%Y") %></td>
+				  	</tr>
+                    <tr>
+                      <td>To:</td>
+                      <td><%= @leave_request.todate.strftime("%d-%m-%Y") %></td>
+				  	</tr>
+                    <tr>
+                      <td>No. of Working Days:</td>
+                      <td><%= @leave_request.numdays %></td>
+				  	</tr>
+                    <tr>
+                      <td>Resume on:</td>
+                      <td><%= @leave_request.resumeon.strftime("%d-%m-%Y") %></td>
+				  	</tr>
+                      <td>Reporting Manager:</td>
+                      <td><%= @manager.first_name.capitalize+" "+@manager.last_name.capitalize %></td>
+				  	</tr>
+                    <tr>
+                      <td>No of leaves deduted for this leave form:</td>
+                      <td>
+			<%= f.fields_for :leafe do |l| %>	  
+			
+                      	<table class="table3">
+                          <tr>
+                            <td><%= l.label :'ELs:' %></td>
+                            <td>
+				<%= l.text_field :els ,:value=>'0',:size=>'4',:style => "width: 25px;" %>
+				<%= l.hidden_field :els ,:name=>'els' ,:id=>'els' ,:size=>'4',:style => "width: 25px;" %>   
+				</td>
+                            <td><%= l.label :'NELs:' %></td>
+                            <td><%= l.text_field :nels ,:value=>'0',:size=>'4',:style => "width: 25px;" %>
+                            <%= l.hidden_field :nels ,:name=>'nels' ,:id=>'nels' ,:size=>'4',:style => "width: 25px;" %>
+                            </td>
+                          </tr>
+                           <tr>
+                            <td><%= l.label :'LOPs:' %></td>
+                            <td>
+				<%= l.text_field :lops ,:value=>'0', :size=>'4',:style => "width: 25px;" %>
+				<%= l.hidden_field :lops ,:name=>'lops' ,:id=>'lops' ,:size=>'4',:style => "width: 25px;" %>
+				</td>
+                            <td><%= l.label :'Offs:' %></td>
+                            <td>
+				<%= l.text_field :compoffs ,:value=>'0', :size=>'4',:style => "width: 25px;" %>
+				<%= l.hidden_field :compoffs ,:name=>'compoffs' ,:id=>'compoffs' ,:size=>'4',:style => "width: 25px;" %>
+				</td>
+                          </tr>                                                   
+                        </table>
+                       <% end %>
+
+                      
+                      </td>
+		      </tr>	
+                    <tr>
+		    <td></td>
+                    <td>
+                  <%= submit_tag "Edit",:name=>'edit',:id=>'edit',:class => "button", :onclick => "return validate('edit');" %>
+                  <%= submit_tag "Commit",:name=>'commit',:id=>'commit',:class => "button" , :onclick => "return validate('commit');" %>
+                 </td>
+                  </tr>	
+                   
+                    <% if (@leave_request.els == 0.0 or !@leave_request.els.nil? )  %>
+		 <tr>
+		 <td colspan="2" style="font-weight:bold"> <font color='red'>Note:</font> Admin already deducted  
+                  <% if  @leave_request.els !=0.0 %>
+                  <%= number_to_human(@leave_request.els) %> ELs
+                  <% end %> 
+                  <% if @leave_request.nels!=0.0 %>
+                  <%= number_to_human(@leave_request.nels) %> NELs
+                  <% end %> 
+                  <% if  @leave_request.lops!=0.0%>
+                  <%= number_to_human(@leave_request.lops) %> LOPs
+                  <% end %> 
+                  <% if  @leave_request.compoffs!=0.0 %>
+                  <%= number_to_human(@leave_request.compoffs) %> Compoffs
+                  <% end %>  from this leave. </td>
+			</tr>	
+                  <% end %>		 
+				  	  
+                  </table>
+                </td>
+<td><%= render 'layouts/employee_module' %></td>
+               
+            </tr>
+        </table>	
+
+   <% end %>
+    </div>
+  </div>
+</section>
+
+<script >
+ function validate(msg){
+ 
+
+var els = document.getElementById("employee_leafe_attributes_els").value;
+var nels = document.getElementById("employee_leafe_attributes_nels").value;
+var lops = document.getElementById("employee_leafe_attributes_lops").value;
+var compoffs = document.getElementById("employee_leafe_attributes_compoffs").value;
+var cels = document.getElementById("els").value;
+
+if((parseFloat(els) > 0 || parseFloat(nels) > 0 || parseFloat(lops) > 0 ||parseFloat(compoffs) > 0)){
+ 
+if((parseFloat(cels) - parseFloat(els)) < 3 && parseFloat(els) > 0){
+alert("A minimum of 3 EL's have to be maintained.");
+return false;
+}
+else
+{
+return confirm('Are you sure you want to '+msg+' the leave?');
+}
+}else{
+alert('Please fill number of leaves deducted.');
+return false;
+}
+}
+
+</script>
+
+
+

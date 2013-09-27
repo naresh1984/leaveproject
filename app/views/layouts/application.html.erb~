@@ -1,0 +1,10 @@
+<% if session[:user_id] %>
+<%= render 'layouts/header_session' %>
+<% else %>
+
+<%= render 'layouts/header' %>
+<% end %>
+<%= yield %>
+<% if session[:user_id] %>
+<%= render 'layouts/footer' %>
+<% end %>
