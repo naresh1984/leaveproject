@@ -35,7 +35,9 @@ before_filter :authorize
       @search+=" AND location_id >= '#{session[:location_id]}'"
      end
     
-  @leave_requests=LeaveRequest.joins(:employee).select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').where(@search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
+  #@leave_requests=LeaveRequest.joins(:employee).select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').where(@search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
+    @leave_requests=LeaveRequest.joins(:employee).where(@search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
+
 
     respond_to do |format|
       format.html # index.html.erb

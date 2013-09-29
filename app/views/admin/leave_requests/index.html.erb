@@ -69,20 +69,20 @@
                   <td><%= leave_request.todate.strftime("%d-%m-%Y") %></td>
                   <td><%= leave_request.numdays %></td>
                   <td>
-                  <% if leave_request.els.nil? %>
+                  <% if leave_request.processed_leave.els_count.nil? %>
                   --
                   <% else %>
-                  <% if  leave_request.els !=0.0 %>
-                  Els <%= number_to_human(leave_request.els) %>
+                  <% if  leave_request.processed_leave.els_count !=0.0 %>
+                  Els <%= number_to_human(leave_request.leave_request.processed_leaves.els_count) %>
                   <% end %> 
-                  <% if leave_request.nels!=0.0 %>
-                  NEls <%= number_to_human(leave_request.nels) %>
+                  <% if leave_request.processed_leave.nels_count!=0.0 %>
+                  NEls <%= number_to_human(leave_request.processed_leave.nels_count) %>
                   <% end %> 
-                  <% if  leave_request.lops!=0.0%>
+                  <% if  leave_request.processed_leave.lops_count!=0.0%>
                   Lops <%= number_to_human(leave_request.lops) %>
                   <% end %> 
-                  <% if  leave_request.compoffs!=0.0 %>
-                  Compoffs <%= number_to_human(leave_request.compoffs) %>
+                  <% if  leave_request.processed_leave.compoffs_count!=0.0 %>
+                  Compoffs <%= number_to_human(leave_request.processed_leave.compoffs_count) %>
                   <% end %> 
                   <% end %>  
                   </td>
@@ -91,7 +91,7 @@
                    <% if leave_request.status=='Cancelled' ||  leave_request.status=='Rejected' ||  leave_request.status=='Commited' %>
                    <% else %>
                    <%= link_to (image_tag "view_edit.png", :title => 'View/Edit'),edit_admin_leave_request_path(leave_request)  %>
-                    <%  if (leave_request.status=='Pending' || leave_request.status=='Approved') and ( !leave_request.els?) %>
+                    <%  if (leave_request.status=='Pending' || leave_request.status=='Approved') and ( leave_request.processed_leave.els_count!=0) %>
                    <%= link_to (image_tag "cancel.png", :title => 'Cancel'),admin_leave_cancel_path(:id=>leave_request,:status_search=>params[:status_search],:fromdate=>params[:fromdate],:todate=>params[:todate],:path=>'2'), :confirm => 'Are you sure you want to cancel this leave?'  %>
                    <% end %> 
                    <% if leave_request.status=='Approved' %>
