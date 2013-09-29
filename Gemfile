@@ -8,6 +8,13 @@ gem 'rails', '3.2.13'
 #gem 'sqlite3'
 gem 'quiet_assets'
 gem 'mysql2'
+group :development do
+  gem 'mysql2'
+end
+group :production do
+  gem 'pg'
+end
+gem 'rails_12factor', group: :production
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +31,7 @@ end
 gem 'jquery-rails'
 gem 'will_paginate-bootstrap'
 gem "nested_form"
+gem "thin"
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
