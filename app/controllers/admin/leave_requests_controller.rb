@@ -460,7 +460,7 @@ def leave_request_commit
          @leaves_audit_logs.save
          @employees=Employee.find(params[:id]);
          @manager=Employee.find(@employees.manager_id);
-        #UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver
+         UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver
        
         render :text => '<script type="text/javascript">window.opener.location.reload();window.close();</script>'
     

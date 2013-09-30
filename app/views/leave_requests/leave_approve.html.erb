@@ -112,6 +112,11 @@
           <tr><th colspan="5" class="tabTitle">All approved leaves of this employee in the current year.</th></tr>
           <tr><th>S.No.</th><th>From</th><th>To</th><th>No. of Days</th><!--<th>Type of Leaves</th>--></tr>
           <% i=1 %>
+          <% if @total_leaves.empty? %>
+            <tr>
+	   <td align="center" colspan='4'>No Records Found </td>
+	 </tr>
+          <% end %>
           <%  @total_leaves.each do |leave| %>
 		            <tr>
 		  <td align="center"><%= i %></td>
