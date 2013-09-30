@@ -1,5 +1,5 @@
  <table class="table1" width="85%">
           <tr><th colspan="2" class="tabTitle">Available Leaves upto 1st of current month</th></tr>
-		  <tr><td>ELs:</td><td><%= @employee_m.els %></td></tr><tr><td>NELs:</td><td><%= @employee_m.nels %></td></tr><tr><td colspan="2"><em>Number of leaves applied/taken from 1st of current month: <%= @employee_m.count %> days.</em></td></tr></table>                </td>
+		  <tr><td>ELs:</td><td><%= @employee_m.processedleave.els_count %></td></tr><tr><td>NELs:</td><td><%= @employee_m..processedleave.nels_count %></td></tr><tr><td colspan="2"><em>Number of leaves applied/taken from 1st of current month: <%= @employee_m.count %> days.</em></td></tr></table>                </td>
             </tr>
         </table>
