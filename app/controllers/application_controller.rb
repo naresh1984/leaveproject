@@ -12,10 +12,10 @@ def employee_module (id)
 @search=" employee_id= '#{id}' "
 @search1=" AND  leave_requests.fromdate >= '#{d.at_beginning_of_month.to_formatted_s(:db)}'"
 #@employee_module=Leafe.select('leaves.*,(select count(*) From leave_requests Where  leave_requests.employee_id=leaves.employee_id  AND  leave_requests.fromdate >= "'+d.at_beginning_of_month.to_formatted_s(:db)+'" AND  leave_requests.status!="Cancelled" AND  leave_requests.status!="Commited"  ) as count').find_by_employee_id(id);
- @employee=Leafe.find_by_employee_id(id);
- @employee.lops=LeaveRequest.joins(:employee).where("leave_requests.fromdate >='#{d.at_beginning_of_month.to_formatted_s(:db)}' AND  leave_requests.status!='Cancelled' AND  leave_requests.status!='Commited' AND  employee_id= #{id}").count
+ @employee_ms=Leafe.find_by_employee_id(id);
+ @employee_ms.lops=LeaveRequest.joins(:employee).where("leave_requests.fromdate >='#{d.at_beginning_of_month.to_formatted_s(:db)}' AND  leave_requests.status!='Cancelled' AND  leave_requests.status!='Commited' AND  employee_id= #{id}").count
 
-return @employee
+return @employee_ms
 end
 
 
