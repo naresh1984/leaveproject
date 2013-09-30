@@ -73,42 +73,42 @@ ActiveRecord::Schema.define(:version => 20130927115215) do
 
   create_table "leaves", :force => true do |t|
     t.integer "employee_id"
-    t.float   "els"
-    t.float   "nels"
-    t.float   "lops"
-    t.float   "compoffs"
-    t.float   "is_special"
+    t.float   "els",         :default => 0.0
+    t.float   "nels",        :default => 0.0
+    t.float   "lops",        :default => 0.0
+    t.float   "compoffs",    :default => 0.0
+    t.float   "is_special",  :default => 0.0
     t.integer "createdby"
     t.integer "modifiedby"
   end
 
   create_table "leaves_audit_logs", :force => true do |t|
     t.integer  "employee_id"
-    t.float    "preels"
-    t.float    "prenels"
-    t.float    "prelops"
-    t.float    "precompoffs"
-    t.float    "currentels"
-    t.float    "currentnels"
-    t.float    "currentlops"
-    t.float    "currentcompoffs"
+    t.float    "preels",           :default => 0.0
+    t.float    "prenels",          :default => 0.0
+    t.float    "prelops",          :default => 0.0
+    t.float    "precompoffs",      :default => 0.0
+    t.float    "currentels",       :default => 0.0
+    t.float    "currentnels",      :default => 0.0
+    t.float    "currentlops",      :default => 0.0
+    t.float    "currentcompoffs",  :default => 0.0
     t.string   "tableorscreen"
     t.integer  "tableid"
     t.integer  "premodifiedby"
     t.integer  "recentmodifiedby"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "processed_leaves", :force => true do |t|
     t.integer  "leave_request_id"
-    t.float    "els"
-    t.float    "nels"
-    t.float    "lops"
-    t.float    "compoffs"
+    t.float    "els",              :default => 0.0
+    t.float    "nels",             :default => 0.0
+    t.float    "lops",             :default => 0.0
+    t.float    "compoffs",         :default => 0.0
     t.integer  "processed_by"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "roles", :force => true do |t|

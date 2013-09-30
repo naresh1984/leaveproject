@@ -287,7 +287,7 @@ if params[:status_search].present? && params[:status_search]=='All'
   @employee=Employee.find(params[:id])
   #@leave_requests=LeaveRequest.joins(:employee,:processed_leave).select('leave_requests.*, sum(els) as total_els,sum(nels) as total_nels,sum(lops) as total_lops,sum(lops) as total_compoffs').where(@search).paginate(:page => params[:page],:per_page => 10).group("leave_requests.id,processed_leaves.leave_request_id").order("leave_requests.fromdate DESC")
 
- @leave_requests=LeaveRequest.joins(:employee).select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').where(@search).paginate(:page => params[:page],:per_page => 10).order("leave_requests.fromdate DESC")
+ @leave_requests=LeaveRequest.joins(:employee).where(@search).paginate(:page => params[:page],:per_page => 10).order("leave_requests.fromdate DESC")
 
   #raise @leave_requests.size.inspect
 

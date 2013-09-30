@@ -16,7 +16,7 @@ class LeaveRequestsController < ApplicationController
 
 
     @employees = Employee.find(session[:user_id])
-    @leave_requests = @employees.leave_requests.select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').where(@status_search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
+    @leave_requests = @employees.leave_requests.where(@status_search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
 
 
     respond_to do |format|

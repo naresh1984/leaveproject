@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  attr_accessible :address, :contact_no, :created_by, :email, :first_name, :last_name, :manager_id, :modified_by, :empid, :password_digest, :password,:password_confirmation
+  attr_accessible :address, :contact_no, :created_by, :email, :first_name, :last_name, :manager_id, :modified_by, :empid, :password_digest, :password, :location_id, :password_confirmation
                 :leafe_attributes
   validates :email, presence: true, uniqueness: true
   validates :empid, presence: true, uniqueness: true
