@@ -72,7 +72,7 @@
                  </td>
                   </tr>	
                    
-                    <% if @leave_request.processed_leave.els_count!=0 &&  @leave_request.processed_leave.nels_count!=0 && @leave_request.processed_leave.lops_count!=0 && @leave_request.processed_leave.compoffs_count!=0 %>
+                    <% if @leave_request.processed_leave.els_count!=0 ||  @leave_request.processed_leave.nels_count!=0 || @leave_request.processed_leave.lops_count!=0 || @leave_request.processed_leave.compoffs_count!=0 %>
 		 <tr>
 		 <td colspan="2" style="font-weight:bold"> <font color='red'>Note:</font> Admin already deducted  
                   <% if  @leave_request.processed_leave.els_count!=0 || @leave_request.processed_leave.els_count!=0.0 %>
