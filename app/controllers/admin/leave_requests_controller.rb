@@ -363,15 +363,13 @@ def leave_request_commit
          @employees=Employee.find(@leave_request.employee_id);
          @manager=Employee.find(@employees.manager_id);
          if params[:commit] == 'Commit'
-          @prole=ProcessedLeave.find_by_leave_request_id(params[:id]);
-
-
+          #@prole=ProcessedLeave.find_by_leave_request_id(params[:id]);
           @leafeatt={} 
-	  @leafeatt['els']=@prole.els_count == 0.0 ||  @prole.els_count == '' ?   '' : @prole.els_count
-	  @leafeatt['nels']=@prole.nels_count == 0.0 ||  @prole.nels_count == '' ?   '' : @prole.nels_count
-	  @leafeatt['lops']=@prole.lops_count == 0.0 ||  @prole.lops_count == '' ?   '' : @prole.lops_count
-	  @leafeatt['compoffs']=@prole.compoffs_count == 0.0 ||  @prole.compoffs_count == '' ?   '' : @prole.compoffs_count 
-          #raise  @leafeatt.inspect 
+	  @leafeatt['els']=@leave_request.processed_leave.els_count == 0.0 ||  @leave_request.processed_leave.els_count == '' ?   '' : @leave_request.processed_leave.els_count
+	  @leafeatt['nels']=@leave_request.processed_leave.nels_count == 0.0 ||  @leave_request.processed_leave.nels_count == '' ?   '' : @leave_request.processed_leave.nels_count
+	  @leafeatt['lops']=@leave_request.processed_leave.lops_count == 0.0 ||  @leave_request.processed_leave.lops_count == '' ?   '' : @leave_request.processed_leave.lops_count
+	  @leafeatt['compoffs']=@leave_request.processed_leave.compoffs_count == 0.0 ||  @leave_request.processed_leave.compoffs_count == '' ?   '' : @leave_request.processed_leave.compoffs_count 
+          raise  @leafeatt.inspect 
          UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver     
         end 
         format.html { redirect_to @cus_request_path, notice: 'Leave request was successfully updated.' }
