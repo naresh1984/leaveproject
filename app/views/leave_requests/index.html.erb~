@@ -5,11 +5,17 @@
       <%= form_tag leave_requests_path, :method => :get do %>
 
           <table class="width_full" style="border:solid 1px #0d5478;">
-
             <tr>
               <td colspan="7">
-
-               
+                <table width="100%" >
+                  <tr>
+                    <td>  <h2><%= params[:status_search] || 'Approved' %> Leaves <% if @leave_requests.count!=0 %>(<%= @leave_requests.count %>)<% end %></h2>
+                    </td>
+                    <td align="right">
+                      <%= select_tag(:status_search, options_for_select([['All', 'All'],['Pending', 'Pending'], ['Approved', 'Approved'],['Rejected', 'Rejected'], ['Cancelled', 'Cancelled'], ['Commited', 'Commited']], params[:status_search] || 'Approved'),:onchange => 'this.form.submit()') %>
+                    </td>
+                  </tr>
+                </table>
       <% end %>
       </td>
       </tr>
