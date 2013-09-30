@@ -43,16 +43,16 @@
                   --
                   <% else %>
                   <% if  leave_request.processed_leave.els_count!=0 || leave_request.processed_leave.els_count!=0.0 %>
-                  ELs <%= number_to_human(leave_request.els) %>
+                  ELs <%= number_to_human(leave_request.processed_leave.els_count) %>
                   <% end %> 
                   <% if leave_request.processed_leave.nels_count!=0 || leave_request.processed_leave.nels_count!=0.0 %>
-                  NEls <%= number_to_human(leave_request.nels) %>
+                  NEls <%= number_to_human(leave_request.processed_leave.nels_count) %>
                   <% end %> 
                   <% if  leave_request.processed_leave.lops_count!=0 || leave_request.processed_leave.lops_count!=0.0 %>
-                  Lops <%= number_to_human(leave_request.lops) %>
+                  Lops <%= number_to_human(leave_request.processed_leave.lops_count) %>
                   <% end %> 
                   <% if  leave_request.processed_leave.compoffs_count!=0 || leave_request.processed_leave.compoffs_count!=0.0 %>
-                  Compoffs <%= number_to_human(leave_request.compoffs) %>
+                  Compoffs <%= number_to_human(leave_request.processed_leave.compoffs_count) %>
                   <% end %> 
                   <% end %>  
                   </td>
