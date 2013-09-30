@@ -369,7 +369,7 @@ def leave_request_commit
 	  @leafeatt['nels']=@leave_request.processed_leave.nels_count == 0.0 ||  @leave_request.processed_leave.nels_count == '' ?   '' : @leave_request.processed_leave.nels_count
 	  @leafeatt['lops']=@leave_request.processed_leave.lops_count == 0.0 ||  @leave_request.processed_leave.lops_count == '' ?   '' : @leave_request.processed_leave.lops_count
 	  @leafeatt['compoffs']=@leave_request.processed_leave.compoffs_count == 0.0 ||  @leave_request.processed_leave.compoffs_count == '' ?   '' : @leave_request.processed_leave.compoffs_count 
-          raise  @leafeatt.inspect 
+         # raise  @leafeatt.inspect 
          UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver     
         end 
         format.html { redirect_to @cus_request_path, notice: 'Leave request was successfully updated.' }
