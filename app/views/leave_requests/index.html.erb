@@ -39,8 +39,7 @@
                   <td><%= leave_request.todate.strftime("%d-%m-%Y") %></td>
                   <td><%= leave_request.numdays %></td>
                   <td>
-                  <% if leave_request.processed_leave.els_count==0 &&  leave_request.processed_leave.nels_count==0 && leave_request.processed_leave.lops_count==0 && leave_request.processed_leave.compoffs_count==0 %>
-                  --
+                  <% if leave_request.processed_leave.els_count==0 &&  leave_request.processed_leave.nels_count==0 && leave_request.processed_leave.lops_count==0 && leave_request.processed_leave.compoffs_count==0 %>--
                   <% else %>
                   <% if  leave_request.processed_leave.els_count!=0 || leave_request.processed_leave.els_count!=0.0 %>
                   ELs <%= number_to_human(leave_request.processed_leave.els_count) %>

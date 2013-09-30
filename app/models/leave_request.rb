@@ -23,4 +23,6 @@ def self.els_count
     sum(:compoffs)
   end
 
+
+
 end
