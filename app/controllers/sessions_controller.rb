@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
       redirect_to leave_requests_url
 
     else
-raise @user.inspect
+ #raise @user.inspect
       redirect_to login_url, alert: "Invalid user/password combination"
     end
   end
