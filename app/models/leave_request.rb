@@ -7,5 +7,20 @@ class LeaveRequest < ActiveRecord::Base
  belongs_to :employee
  has_many :processed_leave , :class_name => "ProcessedLeave"
 
+def self.els_count
+    sum(:els)
+  end
+
+  def self.nels_count
+    sum(:nels)
+  end
+
+  def self.lops_count
+    sum(:lops)
+  end
+
+  def self.compoffs_count
+    sum(:compoffs)
+  end
 
 end
