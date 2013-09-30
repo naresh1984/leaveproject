@@ -296,10 +296,12 @@ if params[:status_search].present? && params[:status_search]=='All'
 
   def commit_leave
    @leave_request = LeaveRequest.find(params[:id])   
-   @employee = Employee.joins(:leafe).find(@leave_request.employee_id)       
+   @employee = Employee.joins(:leafe).find(@leave_request.employee_id)   
    @manager = Employee.find(@employee.manager_id)
    @employee_m=employee_module(@leave_request.employee_id);
    #@employee.build_leafe 
+
+  #raise @employee.inspect      
    
   end
   
