@@ -363,14 +363,14 @@ def leave_request_commit
          @employees=Employee.find(@leave_request.employee_id);
          @manager=Employee.find(@employees.manager_id);
          if params[:commit] == 'Commit'
-          @prole=ProcessedLeave.select('processed_leaves .*, sum(els) as pels,sum(nels) as pnels ,sum(lops) as plops,sum(compoffs) as pcompoffs').find_by_leave_request_id(params[:id]);
+          @prole=ProcessedLeave.find_by_leave_request_id(params[:id]);
 
 
           @leafeatt={} 
-	  @leafeatt['els']=@prole.pels == 0.0 ||  @prole.pels == '' ?   '' : @prole.pels
-	  @leafeatt['nels']=@prole.pnels == 0.0 ||  @prole.pnels == '' ?   '' : @prole.pnels
-	  @leafeatt['lops']=@prole.plops == 0.0 ||  @prole.plops == '' ?   '' : @prole.plops
-	  @leafeatt['compoffs']=@prole.pcompoffs == 0.0 ||  @prole.pcompoffs == '' ?   '' : @prole.pcompoffs 
+	  @leafeatt['els']=@prole.els_count == 0.0 ||  @prole.els_count == '' ?   '' : @prole.els_count
+	  @leafeatt['nels']=@prole.nels_count == 0.0 ||  @prole.nels_count == '' ?   '' : @prole.nels_count
+	  @leafeatt['lops']=@prole.lops_count == 0.0 ||  @prole.lops_count == '' ?   '' : @prole.lops_count
+	  @leafeatt['compoffs']=@prole.compoffs_count == 0.0 ||  @prole.compoffs_count == '' ?   '' : @prole.compoffs_count 
           #raise  @leafeatt.inspect 
          UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver     
         end 
