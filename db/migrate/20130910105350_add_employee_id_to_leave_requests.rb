@@ -1,7 +1,7 @@
 class AddEmployeeIdToLeaveRequests < ActiveRecord::Migration
   def up
 
-    add_column :leave_requests, :employee_id, :string 
+    add_column :leave_requests, :employee_id, :integer 
     add_column :leave_requests, :fromdate, :date
     add_column :leave_requests, :to_date, :date
     add_column :leave_requests, :numdays, :integer
@@ -20,7 +20,7 @@ class AddEmployeeIdToLeaveRequests < ActiveRecord::Migration
 
   def down
 
-    remove_column :leave_requests, :employee_id, :string 
+    remove_column :leave_requests, :employee_id, :integer
     remove_column :leave_requests, :fromdate, :date
     remove_column :leave_requests, :to_date, :date
     remove_column :leave_requests, :numdays, :integer
