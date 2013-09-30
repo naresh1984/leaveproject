@@ -11,13 +11,13 @@ class LeaveRequestsController < ApplicationController
     elsif params[:status_search].present? 
       @status_search ="status = '#{params[:status_search]}'"
     else
-      @status_search = "status = 'Approved'"
+     @status_search = " id >0  " 
     end
 
 
     @employees = Employee.find(session[:user_id])
     @leave_requests = @employees.leave_requests.where(@status_search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
- raise @leave_requests.inspect
+ #raise  @leave_requests.inspect
 
     respond_to do |format|
       format.html # index.html.erb
