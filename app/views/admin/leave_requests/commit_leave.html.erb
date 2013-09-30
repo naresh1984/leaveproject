@@ -72,21 +72,21 @@
                  </td>
                   </tr>	
                    
-                    <% if (@leave_request.els == 0.0 or !@leave_request.els.nil? )  %>
+                    <% if leave_request.processed_leave.els_count==0 &&  leave_request.processed_leave.nels_count==0 && leave_request.processed_leave.lops_count==0 && leave_request.processed_leave.compoffs_count==0  %>
 		 <tr>
 		 <td colspan="2" style="font-weight:bold"> <font color='red'>Note:</font> Admin already deducted  
-                  <% if  @leave_request.els !=0.0 %>
-                  <%= number_to_human(@leave_request.els) %> ELs
+                  <% if  leave_request.processed_leave.els_count!=0 || leave_request.processed_leave.els_count!=0.0 %>
+                  ELs <%= number_to_human(leave_request.processed_leave.els_count) %>
                   <% end %> 
-                  <% if @leave_request.nels!=0.0 %>
-                  <%= number_to_human(@leave_request.nels) %> NELs
+                  <% if leave_request.processed_leave.nels_count!=0 || leave_request.processed_leave.nels_count!=0.0 %>
+                  NEls <%= number_to_human(leave_request.processed_leave.nels_count) %>
                   <% end %> 
-                  <% if  @leave_request.lops!=0.0%>
-                  <%= number_to_human(@leave_request.lops) %> LOPs
+                  <% if  leave_request.processed_leave.lops_count!=0 || leave_request.processed_leave.lops_count!=0.0 %>
+                  Lops <%= number_to_human(leave_request.processed_leave.lops_count) %>
                   <% end %> 
-                  <% if  @leave_request.compoffs!=0.0 %>
-                  <%= number_to_human(@leave_request.compoffs) %> Compoffs
-                  <% end %>  from this leave. </td>
+                  <% if  leave_request.processed_leave.compoffs_count!=0 || leave_request.processed_leave.compoffs_count!=0.0 %>
+                  Compoffs <%= number_to_human(leave_request.processed_leave.compoffs_count) %>
+                  <% end %>   from this leave. </td>
 			</tr>	
                   <% end %>		 
 				  	  

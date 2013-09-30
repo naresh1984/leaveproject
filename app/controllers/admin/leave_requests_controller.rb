@@ -295,7 +295,7 @@ if params[:status_search].present? && params[:status_search]=='All'
   end
 
   def commit_leave
-   @leave_request = LeaveRequest.select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').find(params[:id])   
+   @leave_request = LeaveRequest.find(params[:id])   
    @employee = Employee.joins(:leafe).find(@leave_request.employee_id)       
    @manager = Employee.find(@employee.manager_id)
    @employee_m=employee_module(@leave_request.employee_id);
