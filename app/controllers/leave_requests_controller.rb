@@ -92,7 +92,7 @@ class LeaveRequestsController < ApplicationController
 
         @employees = Employee.find(session[:user_id])
         @manager = Employee.find(params[:manager_id])
-        #UserMailer.welcome_email(@manager,@leave_request,@employees,'Request For Leave',@manager.email).deliver
+        UserMailer.welcome_email(@manager,@leave_request,@employees,'Request For Leave',@manager.email).deliver
 
         format.html { redirect_to request_success_url, notice: 'Leave request  has been sent successfully to your reporting manager' }
         format.json { render json: @leave_request, status: :created, location: @leave_request }
