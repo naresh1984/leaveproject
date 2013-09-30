@@ -17,7 +17,7 @@ class LeaveRequestsController < ApplicationController
 
     @employees = Employee.find(session[:user_id])
     @leave_requests = @employees.leave_requests.where(@status_search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
-
+ 
 
     respond_to do |format|
       format.html # index.html.erb
