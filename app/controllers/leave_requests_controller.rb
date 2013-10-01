@@ -255,7 +255,7 @@ class LeaveRequestsController < ApplicationController
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @employees.email).deliver        
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver 
                
-        format.html { redirect_to request_update_path, notice: 'Leave request was successfully updated.' }
+        format.html { redirect_to leave_approve_path, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "leave_approve_path" }
