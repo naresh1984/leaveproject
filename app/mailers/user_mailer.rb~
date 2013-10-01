@@ -46,6 +46,18 @@ def commit_email(manager,leave_requests,employees,leafe,leave_heading,email_to)
 
   end
 
+def forced_email(employees,leafeatt,leave_heading,email_to)   
+    @employees = employees   
+    @leave_heading  =leave_heading  
+    @leafe  =leafeatt 
+    @email_to  =email_to
+    @url  = 'http://example.com/login'
+    mail(to:@email_to,
+         subject: @leave_heading) do |format|
+      format.html { render 'user_mailer/forced' }
 
+    end
+
+  end
 
 end

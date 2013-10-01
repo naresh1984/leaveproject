@@ -295,11 +295,13 @@ if params[:status_search].present? && params[:status_search]=='All'
   end
 
   def commit_leave
-   @leave_request = LeaveRequest.select('leave_requests.*,(select sum(els) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as els  ,(select sum(nels) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as nels ,(select sum(lops) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as lops,(select sum(compoffs) From processed_leaves Where  leave_requests.id=processed_leaves.leave_request_id) as compoffs').find(params[:id])   
-   @employee = Employee.joins(:leafe).find(@leave_request.employee_id)       
+   @leave_request = LeaveRequest.find(params[:id])   
+   @employee = Employee.joins(:leafe).find(@leave_request.employee_id)   
    @manager = Employee.find(@employee.manager_id)
    @employee_m=employee_module(@leave_request.employee_id);
    #@employee.build_leafe 
+
+  #raise @employee.inspect      
    
   end
   
@@ -361,15 +363,13 @@ def leave_request_commit
          @employees=Employee.find(@leave_request.employee_id);
          @manager=Employee.find(@employees.manager_id);
          if params[:commit] == 'Commit'
-          @prole=ProcessedLeave.select('processed_leaves .*, sum(els) as pels,sum(nels) as pnels ,sum(lops) as plops,sum(compoffs) as pcompoffs').find_by_leave_request_id(params[:id]);
-
-
+          #@prole=ProcessedLeave.find_by_leave_request_id(params[:id]);
           @leafeatt={} 
-	  @leafeatt['els']=@prole.pels == 0.0 ||  @prole.pels == '' ?   '' : @prole.pels
-	  @leafeatt['nels']=@prole.pnels == 0.0 ||  @prole.pnels == '' ?   '' : @prole.pnels
-	  @leafeatt['lops']=@prole.plops == 0.0 ||  @prole.plops == '' ?   '' : @prole.plops
-	  @leafeatt['compoffs']=@prole.pcompoffs == 0.0 ||  @prole.pcompoffs == '' ?   '' : @prole.pcompoffs 
-          #raise  @leafeatt.inspect 
+	  @leafeatt['els']=@leave_request.processed_leave.els_count == 0.0 ||  @leave_request.processed_leave.els_count == '' ?   '' : @leave_request.processed_leave.els_count
+	  @leafeatt['nels']=@leave_request.processed_leave.nels_count == 0.0 ||  @leave_request.processed_leave.nels_count == '' ?   '' : @leave_request.processed_leave.nels_count
+	  @leafeatt['lops']=@leave_request.processed_leave.lops_count == 0.0 ||  @leave_request.processed_leave.lops_count == '' ?   '' : @leave_request.processed_leave.lops_count
+	  @leafeatt['compoffs']=@leave_request.processed_leave.compoffs_count == 0.0 ||  @leave_request.processed_leave.compoffs_count == '' ?   '' : @leave_request.processed_leave.compoffs_count 
+         # raise  @leafeatt.inspect 
          UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver     
         end 
         format.html { redirect_to @cus_request_path, notice: 'Leave request was successfully updated.' }
@@ -460,8 +460,7 @@ def leave_request_commit
          @leaves_audit_logs.save
          @employees=Employee.find(params[:id]);
          @manager=Employee.find(@employees.manager_id);
-        #UserMailer.commit_email(@manager,@leave_request,@employees,@leafeatt,'Updated Leave Details By Admin', @employees.email).deliver
-       
+         UserMailer.forced_email(@employees,@leafeatt,'Updated Leave Details By Admin(Forced leave)', @employees.email).deliver       
         render :text => '<script type="text/javascript">window.opener.location.reload();window.close();</script>'
     
        end

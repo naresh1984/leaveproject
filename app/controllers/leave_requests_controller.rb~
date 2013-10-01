@@ -47,7 +47,9 @@ class LeaveRequestsController < ApplicationController
     @options='';
     @manager_list.each do |manager| 
     @options+="[#{manager.id}, #{manager.first_name+'  '+manager.last_name}],"
-      
+   
+
+ #raise @employe12.inspect
     end 
       
 
@@ -193,12 +195,12 @@ class LeaveRequestsController < ApplicationController
 
         @employees = Employee.find(session[:user_id])
         @manager = Employee.find(@employees.manager_id)
-         if session[:location_id] == 1
-        @hr = Employee.find(24)
+        if session[:location_id] == 1
+        @hr = Employee.find(7)
         elsif session[:location_id] == 2
-        @hr = Employee.find(25)
+        @hr = Employee.find(8)
         else
-        @hr = Employee.find(17)
+        @hr = Employee.find(3)
         end
 
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Leave Cancelled', @manager.email).deliver
@@ -243,12 +245,12 @@ class LeaveRequestsController < ApplicationController
       if @leave_request.update_attributes(params[:leave_request])
         @employees = Employee.find(params[:employee_id])
         @manager = Employee.find(@employees.manager_id)
-        if session[:location_id] == 1
-        @hr = Employee.find(24)
+       if session[:location_id] == 1
+        @hr = Employee.find(7)
         elsif session[:location_id] == 2
-        @hr = Employee.find(25)
+        @hr = Employee.find(8)
         else
-        @hr = Employee.find(17)
+        @hr = Employee.find(3)
         end
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @employees.email).deliver        
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver 

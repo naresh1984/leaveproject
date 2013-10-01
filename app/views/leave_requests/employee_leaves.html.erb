@@ -74,18 +74,23 @@
           </tr>
           <% i += 1 %>
       <% end %>
-      <% if @leave_requests_pending.empty? %>
+
+<% if @leave_requests_pending.empty? %>
           <tr>
             <td colspan="9" align="center">No Records Found</td>
           </tr>
       <% else %>
-          <tr>
-            <td colspan="9" align="center">
-              <%= will_paginate @leave_requests_pending, renderer: BootstrapPagination::Rails %>
-              <%= page_entries_info @leave_requests_pending %>
-            </td>
-          </tr>
+              <tr>
+                <td colspan="9" align="center">
+                  <%= will_paginate @leave_requests_pending, renderer: BootstrapPagination::Rails %>
+                  <%= page_entries_info @leave_requests_pending %>
+
+                </td>
+              </tr>
       <% end %>
+
+
+     
 
 
       </tbody></table>
@@ -118,21 +123,23 @@
           </tr>
           <% z += 1 %>
       <% end %>
+     
+         <%  if @leave_requests_approve.count>10 %>
+                <tr>
+                  <td colspan="9" align="center">
+                    <%= will_paginate @leave_requests_approve, renderer: BootstrapPagination::Rails %>
+                    <%= page_entries_info @leave_requests_approve %>
+                  </td>
+                </tr>
+                <% end %>
+                <% if @leave_requests_approve.empty? %>
+                <tr>
+                  <td colspan="9" align="center">No Records Found</td>
+                </tr>
+                <% end %>
 
 
-      <% if @leave_requests_approve.empty? %>
-          <tr>
-            <td colspan="9" align="center">No Records Found</td>
-          </tr>
-      <% else %>
-              <tr>
-                <td colspan="9" align="center">
-                  <%= will_paginate @leave_requests_approve, renderer: BootstrapPagination::Rails %>
-                  <%= page_entries_info @leave_requests_approve %>
-
-                </td>
-              </tr>
-      <% end %>
+      
 
 
       </tbody></table>

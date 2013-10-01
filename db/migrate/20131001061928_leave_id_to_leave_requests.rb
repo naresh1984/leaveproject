@@ -4,9 +4,6 @@ class LeaveIdToLeaveRequests < ActiveRecord::Migration
   
     change_column :leave_requests, :employee_id, :integer
    
-
-
-  
   end
 
 
