@@ -24,7 +24,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
-  gem 'will_paginate-bootstrap'
+ 
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -32,7 +32,7 @@ gem 'jquery-rails'
 
 gem "nested_form"
 gem "thin"
-
+gem 'will_paginate-bootstrap'
 #gem 'jquery-validation-rails'
 
 
