@@ -8,9 +8,6 @@
  * Designed and built with all the love in the world by @mdo and @fat.
  */
 
-.
-
-
 
 a:focus {
   outline: thin dotted #333;
@@ -2531,7 +2528,7 @@ input[type="submit"].btn.btn-mini {
   margin-top: 5px;
 }
 
-.
+
 
 .tabs-stacked .open > a:hover,
 .tabs-stacked .open > a:focus {
