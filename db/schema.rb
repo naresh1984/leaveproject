@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927115215) do
+ActiveRecord::Schema.define(:version => 20131001061928) do
 
   create_table "admin_high_scores", :force => true do |t|
     t.string   "game"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20130927115215) do
   create_table "leave_requests", :force => true do |t|
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.string   "employee_id"
+    t.integer  "employee_id"
     t.date     "fromdate"
     t.date     "todate"
     t.integer  "numdays"
