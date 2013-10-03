@@ -157,9 +157,7 @@ def export_to_csv
     end     
     
   time = Time.new
-   send_data csv_string,
-   :type => 'text/csv; charset=iso-8859-1; header=present',
-   :disposition => "attachment; filename=employee#{time.strftime("%Y-%m-%d %I:%M:%S %p")}.csv" 
+   send_data csv_string,:type => 'text/csv; charset=iso-8859-1; header=present',:disposition => "attachment; filename=employee#{time.strftime("%Y-%m-%d %I:%M:%S %p")}.csv" 
 end 
 
 
