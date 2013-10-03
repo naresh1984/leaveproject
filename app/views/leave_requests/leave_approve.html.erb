@@ -92,6 +92,7 @@
               <td valign="top"></td>
               <td>
                 <%= hidden_field_tag :id ,@leave_request.id %>
+                <%= hidden_field_tag :status_value ,@leave_request.status %>
                 <%= hidden_field_tag :employee_id ,@leave_request.employee_id %>
                 <%= submit_tag "Submit",:class => "button" %><%= link_to 'Back', employee_leaves_path,html_options = {:class => "button"} %></td>
             </tr>
