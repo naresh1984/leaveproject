@@ -3,8 +3,10 @@ class LeaveRequestsController < ApplicationController
   # GET /leave_requests.json
 
   before_filter :authorize
+  @page_title='&nbsp'
 
   def index
+    @page_title="Applied Leaves"
     if params[:status_search] == 'All'
     @status_search = " id >0  " 
    
@@ -17,8 +19,7 @@ class LeaveRequestsController < ApplicationController
 
     @employees = Employee.find(session[:user_id])
     @leave_requests = @employees.leave_requests.where(@status_search).paginate(:page => params[:page],:per_page => 10).order("fromdate DESC")
- 
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @leave_requests }
@@ -40,6 +41,7 @@ class LeaveRequestsController < ApplicationController
   # GET /leave_requests/new
   # GET /leave_requests/new.json
   def new
+    @page_title="Request Leave"
     @employees=Employee.find(session[:user_id]);
     @leave_request = LeaveRequest.new    
     @manager_list=Employee.joins(:employee_roles).where('employees_roles.role_id=3').order('first_name,last_name DESC');
@@ -70,6 +72,7 @@ class LeaveRequestsController < ApplicationController
 
   # GET /leave_requests/1/edit
   def edit
+    @page_title='Leave Edit'
     @employees = Employee.find(session[:user_id])
     @leave_request = @employees.leave_requests.find(params[:id])
     @manager_list=Employee.joins(:employee_roles).where('employees_roles.role_id=3').order('first_name,last_name DESC');
@@ -139,6 +142,7 @@ class LeaveRequestsController < ApplicationController
 
 
   def request_success
+  @page_title='Leave Request Success'
 
   end
 
@@ -148,8 +152,7 @@ class LeaveRequestsController < ApplicationController
 
   def employee_leaves
 
-
-
+     @page_title="Employee's Leaves"
      @search_pending="status = 'Pending'"
      @search_aproved="status = 'Approved'"
 
@@ -224,6 +227,7 @@ class LeaveRequestsController < ApplicationController
 
 
   def leave_approve
+    @page_title='Leave Approve'
     @leave_request = LeaveRequest.find(params[:id])
     @total_leaves=LeaveRequest.where( "  ( ( fromdate >= '#{Date.today.beginning_of_year.to_formatted_s(:db) }'  AND fromdate <='#{Date.today.end_of_year.to_formatted_s(:db)}') OR ( todate >= '#{Date.today.beginning_of_year.to_formatted_s(:db) }'  AND todate <='#{Date.today.end_of_year.to_formatted_s(:db)}') )  AND employee_id='#{@leave_request.employee_id}' AND id!='#{params[:id]}' AND (status='Approved' or status='Commited')");
     @leave_employee= @leave_request.employee

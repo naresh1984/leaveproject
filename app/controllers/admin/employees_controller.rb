@@ -3,7 +3,7 @@ require 'csv'
 include ActionView::Helpers::NumberHelper
 
 def index
-   
+   @page_title='Employess'
    @search=" employee_id >0 "
    if session[:roles].include?(4) == false
    @search+=" AND employees.location_id = '#{session[:location_id]}'"
@@ -35,7 +35,7 @@ def index
   # GET /employees/new
   # GET /employees/new.json
   def new
-
+   @page_title='Add Employee'
    @employee = Employee.new
    @heading="Add Employee"   
    if session[:roles].include?(4)
@@ -60,6 +60,7 @@ def index
 
   # GET /employees/1/edit
   def edit
+  @page_title='Edit Employee'
   @employee= Employee.find(params[:id])
   @heading="Edit Employee Details"
    if session[:roles].include?(4)
@@ -111,7 +112,7 @@ def index
 
   # PUT /employees/1
   # PUT /employees/1.json
-  def update
+  def update  
   @employee = Employee.find(params[:id])
   @employee.location_id= params[:location_id]
   @employee.manager_id= params[:manager_id]

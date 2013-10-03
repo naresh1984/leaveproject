@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
-  skip_before_filter :authorize
+  skip_before_filter :authorize , :only => [:new,:create]
 
-
+  @page_title='Olm | Login'
   def new
     if session[:user_id].present?
       redirect_to leave_requests_path
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
   def create
 
-    @user = Employee.find_by_email(params[:email])
+     @user = Employee.find_by_email(params[:email])
     
     if @user and @user.authenticate(params[:password])
       session[:user_id] = @user.id
@@ -41,12 +41,12 @@ class SessionsController < ApplicationController
 
 
   def change_password
-
+  @page_title="Chnage Password"
 
   end
 
   def change_update
-
+  @page_title="Chnage Password"
     @user =Employee.find(session[:user_id])
 
     if params[:password_old]== '' || params[:password]== '' || params[:password_confirmation]== ''

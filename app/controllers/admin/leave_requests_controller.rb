@@ -1,12 +1,8 @@
 class Admin::LeaveRequestsController < AdminController
-
-
-
-
 before_filter :authorize
 
   def index
- 
+    @page_title='Leaves'
     if params[:status_search].present? && params[:status_search]=='All'     
       @search=" employee_id>0 "
       @search_heading='';    
@@ -48,14 +44,17 @@ before_filter :authorize
 
   # GET /leave_requests/1
   # GET /leave_requests/1.json
- # def show
-   # @leave_request = LeaveRequest.find(params[:id])
+=begin
+  def show
+    @leave_request = LeaveRequest.find(params[:id])
 
-   # respond_to do |format|
-    #  format.html # show.html.erb
-    #  format.json { render json: @leave_request }
-   # end
-  #end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @leave_request }
+    end
+   end
+=end
+
 
   # GET /leave_requests/new
   # GET /leave_requests/new.json
@@ -86,6 +85,7 @@ before_filter :authorize
 
   # GET /leave_requests/1/edit
   def edit
+    @page_title='Employee Leave Edit'
     #@employees = Employee.find(params[:id])
     @leave_request = LeaveRequest.find(params[:id])
     @employees = Employee.find(@leave_request.employee_id)
@@ -142,6 +142,7 @@ before_filter :authorize
 
   # DELETE /leave_requests/1
   # DELETE /leave_requests/1.json
+=begin
   def destroy
     @leave_request = LeaveRequest.find(params[:id])
     @leave_request.destroy
@@ -151,7 +152,7 @@ before_filter :authorize
       format.json { head :no_content }
     end
   end
-
+=end
 
   def request_success
 
@@ -162,9 +163,6 @@ before_filter :authorize
   end
 
   def employee_leaves
-
-
-
      @search_pending="status = 'Pending'"
      @search_aproved="status = 'Approved'"
 
@@ -267,7 +265,7 @@ before_filter :authorize
   end
 
   def applied_leaves
-     
+  @page_title='Employee Applied Leaves'
      
 if params[:status_search].present? && params[:status_search]=='All'     
       @search="employee_id>0"
@@ -295,6 +293,7 @@ if params[:status_search].present? && params[:status_search]=='All'
   end
 
   def commit_leave
+   @page_title='Commit leave'
    @leave_request = LeaveRequest.find(params[:id])   
    @employee = Employee.joins(:leafe).find(@leave_request.employee_id)   
    @manager = Employee.find(@employee.manager_id)
@@ -385,7 +384,7 @@ def leave_request_commit
 
  def forcedleave 
 
- 
+   @page_title='Forced  Leaves'
    @search=" employees.id >0 "
    if session[:roles].include?(4) == false
    @search+=" AND location_id = '#{session[:location_id]}'"
@@ -411,7 +410,7 @@ def leave_request_commit
  end
 
  def addforcedleave 
-   
+   @page_title='Add Forced  Leaves'
    if params[:commit]=="Commit"  
 
 @leafe = Leafe.find_by_employee_id(params[:id]) 
