@@ -28,12 +28,12 @@
   <nav class="clearfix">
   	<div class="container">
         <ul id="menu" class="clearfix">
-            <li ><%= link_to 'Request for Leave' ,request_leave_path %></li>
-            <li ><%= link_to 'Applied Leaves' ,leave_requests_path %></li>
+            <li <% if controller.controller_name=='leave_requests' and  (controller.action_name =='new') %> class='active'<% end %> ><%= link_to 'Request for Leave' ,request_leave_path %></li>
+            <li <% if controller.controller_name=='leave_requests' and  (controller.action_name =='index' || controller.action_name =='leave_cancel' || controller.action_name =='edit')%> class='active'<% end %>><%= link_to 'Applied Leaves' ,leave_requests_path %></li>
 	    <% if session[:roles].include?(3)  %>
-	    <li ><%= link_to "Employee's Leaves" ,employee_leaves_path %></li>
+	    <li <% if controller.controller_name=='leave_requests' and  (controller.action_name =='employee_leaves' || controller.action_name =='leave_approve') %> class='active'<% end %>><%= link_to "Employee's Leaves" ,employee_leaves_path %></li>
 	   <%  end %> 
-            <li ><%= link_to "Change Password",change_password_path %></li>
+            <li <% if controller.controller_name=='sessions' and  controller.action_name =='change_password' %> class='active'<% end %>><%= link_to "Change Password",change_password_path %></li>
         </ul>
         <a href="#" id="pull"><span>Menu</span></a>
     </div>

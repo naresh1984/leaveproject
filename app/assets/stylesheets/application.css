@@ -15,7 +15,7 @@
 
 
 /*********** Common ***************/
-body {margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:12px;}
+
 header,footer,nav,section,article {display:block; margin:0; padding:0;}
 h1,h2,h3,h4,h5,ul {margin:0; padding:0; list-style:none;}
 a img, img {outline:none; border:none;}
@@ -77,7 +77,7 @@ header nav #menu li.active a, header nav #menu li a:hover {background:#054362;}
 nav a#pull {display: none; color:#fff; text-decoration:none; font-size:16px;}
 
 /************* Body ***********/
-#body {padding:20px 0; color:#474747; min-height:350px;}
+
 #body .table1, #body .table1 th, #body .table1 td {border:solid 1px #0d5478; border-collapse:collapse;}
 #body .table2, #body .table2 th, #body .table2 td {border:none; border-collapse:collapse; margin:0 auto;}
 h1 {font-size:15px; color:#0D5478; padding:0px 0 10px 0;}

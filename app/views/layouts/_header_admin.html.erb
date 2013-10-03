@@ -28,9 +28,9 @@
   <nav class="clearfix">
   	<div class="container">
         <ul id="menu" class="clearfix">
-            <li ><%= link_to 'Employees' ,admin_employees_path %></li>
-            <li ><%= link_to 'Leaves' ,admin_leave_requests_path %></li>
-            <li ><%= link_to 'Forced Leaves' ,admin_forcedleave_path %></li>           
+            <li  <% if (controller.controller_name=='employees' || (controller.controller_name=='leave_requests' && controller.action_name !='index'  && controller.action_name !='edit') || controller.controller_name=='leaves' ) and  (controller.action_name =='index' || controller.action_name =='edit' || controller.action_name =='applied_leaves' || params[:path]=='1') %> class='active'<% end %>><%= link_to 'Employees' ,admin_employees_path %><% controller.controller_name %><% controller.action_name %></li>
+            <li <% if controller.controller_name=='leave_requests' and  (controller.action_name =='index' || controller.action_name =='edit' ||  params[:path]=='2') %> class='active'<% end %>><%= link_to 'Leaves' ,admin_leave_requests_path %></li>
+            <li <% if controller.controller_name=='leave_requests' and  (controller.action_name =='forcedleave') %> class='active'<% end %>><%= link_to 'Forced Leaves' ,admin_forcedleave_path %></li>           
         </ul>
         <a href="#" id="pull"><span>Menu</span></a>
     </div>

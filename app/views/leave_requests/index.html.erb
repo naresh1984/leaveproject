@@ -65,7 +65,11 @@
                         <a href="<%= edit_leave_request_path(leave_request) %>" ><%= image_tag("view_edit.png", alt: "View/Edit" , title:"View/Edit") %></a>
                     <% end %>
                     <% if Date.today<=leave_request.todate == true and  (leave_request.status=='Approved' || leave_request.status=='Pending') %>
-                    <%= link_to (image_tag "cancel.png", :title => 'Cancel'),leave_cancel_path(:id=>leave_request) ,:confirm => "Are you sure u want to cancel this leave?"  %>
+                    <% if leave_request.status=='Approved' %>
+                    <%= link_to (image_tag "cancel.png", :title => 'Cancel'),'',:confirm => "Please contact your reporting manager to cancel this leave."  %>
+                    <% else  %>
+   <%= link_to (image_tag "cancel.png", :title => 'Cancel'),leave_cancel_path(:id=>leave_request),:confirm => "Are you sure u want to cancel this leave?"  %>
+                    <% end %>
 
                     <% end %>
 

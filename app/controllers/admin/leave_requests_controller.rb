@@ -128,10 +128,10 @@ before_filter :authorize
       if @leave_request.update_attributes(params[:leave_request])
          
         @employees = Employee.find(@leave_request.employee_id)
-        @manager = Employee.find(@employees.id)
+        @manager = Employee.find(@leave_request.managerid)
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@employees.email).deliver
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@manager.email).deliver
-        format.html { redirect_to admin_request_update_url, notice: 'Leave request was successfully updated.' }
+        format.html { redirect_to admin_leave_requests_url, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -218,7 +218,7 @@ before_filter :authorize
       if @leave_request.update_attributes(params[:leave_request])
 
         @employees = Employee.find(@leave_request.employee_id)
-        @manager = Employee.find(@employees.manager_id)
+        @manager = Employee.find(@leave_request.managerid)
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin', @employees.email).deliver
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin', @manager.email).deliver
         
