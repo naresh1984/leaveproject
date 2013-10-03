@@ -149,7 +149,7 @@ def index
   end
 
 def export_to_csv       
-    @users = Employee.find(:all) 
+    @users = Employee.order("empid DESC").find(:all)
     csv_string = CSV.generate(:col_sep => " ") do |csv|        
          csv << ["Empid", "First Name", "Last name","Contact No",'Address',"Email",'ELs','NELs','CompOffs','LOPs']
          @users.each do |user|
