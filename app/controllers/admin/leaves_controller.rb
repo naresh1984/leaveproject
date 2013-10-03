@@ -1,6 +1,8 @@
 class Admin::LeavesController < AdminController
 
+
 def edit
+  @page_title='Employee Leaves'
 @leafe = Leafe.find_by_employee_id(params[:id])
 @employee=Employee.find(params[:id]);
 end
