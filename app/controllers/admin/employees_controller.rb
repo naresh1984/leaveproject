@@ -154,7 +154,8 @@ def export_to_csv
          @users.each do |user|
            csv << [user.empid, user.first_name, user.last_name,user.contact_no,user.address,user.email,number_to_human(user.leafe.els),number_to_human(user.leafe.nels),number_to_human(user.leafe.compoffs),number_to_human(user.leafe.lops)]
          end
-    end         
+    end     
+    
   time = Time.new
    send_data csv_string,
    :type => 'text/csv; charset=iso-8859-1; header=present',
