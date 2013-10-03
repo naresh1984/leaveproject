@@ -1,6 +1,7 @@
 class LeavesController < ApplicationController
   # GET /leaves
   # GET /leaves.json
+ 
   def index
     @leaves = Leafe.all
 
