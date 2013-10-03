@@ -11,6 +11,7 @@ Leave::Application.routes.draw do
   resources :employees do
    collection do
         get 'search'
+        get 'export_to_csv' => :export_to_csv 
         
       end   
   end
@@ -47,6 +48,7 @@ controller :leave_requests do
   resources :leaves
   resources :employees 
   resources :leave_requests
+ 
   get 'change_password' => 'sessions#change_password'
   post 'change_update' => 'sessions#change_update'
   controller :sessions do

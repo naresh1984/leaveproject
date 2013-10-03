@@ -22,19 +22,15 @@
                 </td>
                 <td align="right">
 
+   <table width="75%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td align="right"><%= link_to (image_tag "xls.png", :title => 'Import'),export_to_csv_admin_employees_path(:format=>"csv")%></td>
+	<td align="right"><%= link_to "Add Employee", new_admin_employee_path, :class => "button" %></td>
+</tr>
+</table>  
 
-                <table width="75%" border="0" cellpadding="0" cellspacing="0" 
-					<tr>
-						
-						<td align="right">
 
-
-
-
-<%= link_to "Add Employee", new_admin_employee_path, :class => "button" %>
-
-					</tr>
-				</table>  
+              
      
 
                 	

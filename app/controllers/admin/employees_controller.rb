@@ -1,5 +1,6 @@
 class Admin::EmployeesController < AdminController
-
+require 'csv'
+include ActionView::Helpers::NumberHelper
 
 def index
    
@@ -21,6 +22,7 @@ def index
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @employees }
+      
     end
   end
 # GET /employees/1
@@ -144,6 +146,21 @@ def index
 
   
   end
+
+def export_to_csv       
+    @users = Employee.find(:all) 
+    csv_string = CSV.generate(:col_sep => " ") do |csv|        
+         csv << ["Empid", "First Name", "Last name","Contact No",'Address',"email",'ELs','NELs','CompOffs','LOPs']
+         @users.each do |user|
+           csv << [user.empid, user.first_name, user.last_name,user.contact_no,user.address,user.email,number_to_human(user.leafe.els),number_to_human(user.leafe.nels),number_to_human(user.leafe.compoffs),number_to_human(user.leafe.lops)]
+         end
+    end         
+  
+   send_data csv_string,
+   :type => 'text/csv; charset=iso-8859-1; header=present',
+   :disposition => "attachment; filename=users.csv" 
+end 
+
 
 
 
