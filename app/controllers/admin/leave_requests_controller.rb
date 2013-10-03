@@ -129,8 +129,17 @@ before_filter :authorize
          
         @employees = Employee.find(@leave_request.employee_id)
         @manager = Employee.find(@leave_request.managerid)
+        if @employees.location_id == 1
+        @hr = Employee.find(7)
+        elsif @employees.location_id == 2
+        @hr = Employee.find(8)
+        else
+        @hr = Employee.find(3)
+        end
+
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@employees.email).deliver
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@manager.email).deliver
+        UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@hr.email).deliver
         format.html { redirect_to admin_leave_requests_url, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
       else
@@ -253,7 +262,15 @@ before_filter :authorize
       if @leave_request.update_attributes(params[:leave_request])
         @employees = Employee.find(params[:employee_id])
         @manager = Employee.find(@employees.manager_id)
+         if @employees.location_id == 1
+        @hr = Employee.find(7)
+        elsif @employees.location_id == 2
+        @hr = Employee.find(8)
+        else
+        @hr = Employee.find(3)
+        end
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @employees.email).deliver
+        UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver
         format.html { redirect_to request_update_path, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
       else

@@ -201,9 +201,9 @@ class LeaveRequestsController < ApplicationController
 
         @employees = Employee.find(session[:user_id])
         @manager = Employee.find(@leave_request.managerid)
-        if session[:location_id] == 1
+        if @employees.location_id == 1
         @hr = Employee.find(7)
-        elsif session[:location_id] == 2
+        elsif @employees.location_id == 2
         @hr = Employee.find(8)
         else
         @hr = Employee.find(3)
@@ -254,16 +254,18 @@ class LeaveRequestsController < ApplicationController
       if @leave_request.update_attributes(params[:leave_request])
         @employees = Employee.find(params[:employee_id])
         @manager = Employee.find(@leave_request.managerid)
-       if session[:location_id] == 1
+       if @employees.location_id == 1
         @hr = Employee.find(7)
-        elsif session[:location_id] == 2
+        elsif @employees.location_id == 2
         @hr = Employee.find(8)
         else
         @hr = Employee.find(3)
         end
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @employees.email).deliver  
-        if  @leave_request.status =='Approved'
+        if  @leave_request.status =='Approved' &&  params[:status_value]=='Pending' 
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver
+        elsif params[:status_value]!='Pending' 
+         UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver
         end      
        # UserMailer.welcome_email(@manager,@leave_request,@employees,'Applied Leave Status', @hr.email).deliver                
         format.html { redirect_to employee_leaves_path, notice: 'Leave request was successfully updated.' }
