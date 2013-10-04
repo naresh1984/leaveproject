@@ -19,8 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minute do
-  runner "Leafe.monthlyupdates"  
-  rake "my:rake:task"
-end
+after "deploy:symlink", "deploy:update_crontab"
 
+namespace :deploy do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
+  end
+end

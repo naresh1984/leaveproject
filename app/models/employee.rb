@@ -12,20 +12,4 @@ class Employee < ActiveRecord::Base
   has_one :leafe  , :dependent => :destroy
   
   accepts_nested_attributes_for :leafe 
-
-def self.monthlyupdates
-      @leafe=Leafe.joins(:employee)
-
-	@leafe.each do |employee|
-
-	@leafe.els=10
-	@leafe.nels=10
-
-	@leafe.update_attributes(employee.employee_id)
-
-	end 
-
-end
-
-
 end
