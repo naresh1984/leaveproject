@@ -18,9 +18,11 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :environment, "development"
+set :output, { error: 'error.log', standard: 'cron.log' }
 
-every 1.minute do
-  runner "Leafe.monthlyupdates"  
-  rake "my:rake:task"
+every :month do
+  runner "Employee.monthlyupdates"  
+ # rake "my:rake:task"
 end
 

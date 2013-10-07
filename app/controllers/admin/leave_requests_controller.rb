@@ -226,8 +226,17 @@ before_filter :authorize
 
         @employees = Employee.find(@leave_request.employee_id)
         @manager = Employee.find(@leave_request.managerid)
+        if @employees.location_id == 1
+        @hr = Employee.find(7)
+        elsif @employees.location_id == 2
+        @hr = Employee.find(8)
+        else
+        @hr = Employee.find(3)
+        end
+
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin', @employees.email).deliver
         UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin', @manager.email).deliver
+        UserMailer.welcome_email(@manager,@leave_request,@employees,'Updated Leave Details By Admin',@hr.email).deliver
         
         format.html { redirect_to @cus_request_path, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
@@ -348,10 +357,10 @@ def leave_request_commit
    @leaves_audit_logs.prelops=params[:lops]
    @leaves_audit_logs.precompoffs=params[:compoffs]
    @leaves_audit_logs.employee_id=@leave_request.employee_id
-   @leaves_audit_logs.currentels=params[:employee][:leafe_attributes][:els]
-   @leaves_audit_logs.currentnels=params[:employee][:leafe_attributes][:nels]
-   @leaves_audit_logs.currentlops=params[:employee][:leafe_attributes][:lops]
-   @leaves_audit_logs.currentcompoffs=params[:employee][:leafe_attributes][:compoffs]
+   @leaves_audit_logs.currentels=params[:els].to_d-params[:employee][:leafe_attributes][:els].to_d
+   @leaves_audit_logs.currentnels=params[:nels].to_d-params[:employee][:leafe_attributes][:nels].to_d
+   @leaves_audit_logs.currentlops=params[:lops].to_d+params[:employee][:leafe_attributes][:lops].to_d
+   @leaves_audit_logs.currentcompoffs=params[:compoffs].to_d+params[:employee][:leafe_attributes][:compoffs].to_d
    @leaves_audit_logs.premodifiedby=session[:user_id]
    @leaves_audit_logs.tableorscreen='leave commit'
    
@@ -451,10 +460,10 @@ def leave_request_commit
    @leaves_audit_logs.prelops=params[:lops]
    @leaves_audit_logs.precompoffs=params[:compoffs]
    @leaves_audit_logs.employee_id=params[:id]
-   @leaves_audit_logs.currentels=params[:employee][:leafe_attributes][:els]
-   @leaves_audit_logs.currentnels=params[:employee][:leafe_attributes][:nels]
-   @leaves_audit_logs.currentlops=params[:employee][:leafe_attributes][:lops]
-   @leaves_audit_logs.currentcompoffs=params[:employee][:leafe_attributes][:compoffs]
+   @leaves_audit_logs.currentels=params[:els].to_d-params[:employee][:leafe_attributes][:els].to_d
+   @leaves_audit_logs.currentnels=params[:nels].to_d-params[:employee][:leafe_attributes][:nels].to_d
+   @leaves_audit_logs.currentlops=params[:lops].to_d+params[:employee][:leafe_attributes][:lops].to_d
+   @leaves_audit_logs.currentcompoffs=params[:compoffs].to_d+params[:employee][:leafe_attributes][:compoffs].to_d
    @leaves_audit_logs.premodifiedby=session[:user_id]
    @leaves_audit_logs.tableorscreen='forced-leave'
    
