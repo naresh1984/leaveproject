@@ -34,7 +34,7 @@ gem "nested_form"
 gem "thin"
 gem 'will_paginate-bootstrap'
 #gem 'jquery-validation-rails'
-
+gem 'whenever'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
