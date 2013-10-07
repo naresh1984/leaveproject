@@ -15,6 +15,11 @@
 
 
 /*********** Common ***************/
+body { 
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+}
 
 header,footer,nav,section,article {display:block; margin:0; padding:0;}
 h1,h2,h3,h4,h5,ul {margin:0; padding:0; list-style:none;}
