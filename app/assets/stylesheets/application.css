@@ -70,7 +70,7 @@ textarea {height:90px; padding:5px; line-height:normal;}
 
 /**************** Header ************/
 header {padding:20px 0;}
-header #logo a{background:url(../images/logo.gif) no-repeat; width:200px; display:block; height:66px; text-indent:-9999999px; padding-bottom:20px;} 
+header #logo a{background:url('logo.gif') no-repeat; width:200px; display:block; height:66px; text-indent:-9999999px; padding-bottom:20px;} 
 header .userdetails {float:right; padding-top:20px;}
 header .userdetails span{display:block; line-height:25px; padding-right:15px; color:#ef8f21;}
 header nav {height:37px; line-height:37px; font-weight:bold; background:#0d5478; color:#fff; width: 100%; position: relative;}
@@ -176,7 +176,7 @@ border:solid 1px  #e17984;
 	header nav ul {display: none; height: auto;}
 	header nav a#pull {display: block; background-color: #054362; width: 100%; position: relative;}
 	header nav a#pull span{padding-left:10px;}
-	header nav a#pull:after {content:""; background: url(../images/nav-icon.png) no-repeat;	width: 30px; height: 30px; display: inline-block; position: absolute; right: 15px; top: 10px;}
+	header nav a#pull:after {content:""; background: url("nav-icon.png") no-repeat;	width: 30px; height: 30px; display: inline-block; position: absolute; right: 15px; top: 10px;}
 	header #logo a {width:100%; clear:both; background-position:top center;}
 	header .userdetails {margin:0 0 30px 0; padding-top:0px;}
 	.login {width:250px;}
