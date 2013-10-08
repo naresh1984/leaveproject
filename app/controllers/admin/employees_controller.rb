@@ -148,9 +148,19 @@ def index
   
   end
 
-def export_to_csv       
+def export_to_csv   
+
+ @users = Employee.joins(:leafe).select("employees.empid,employees.first_name,employees.last_name,employees.email,employees.contact_no,employees.address,leaves.els,leaves.nels,leaves.lops,leaves.compoffs").order("empid ASC").find(:all)
+ 
+
+ #raise @users.inspect 
+ #raise @u.inspect  
+send_data @users.to_xls, content_type: 'application/vnd.ms-excel', filename: 'users.xls' 
+
+
+=begin    
     @users = Employee.order("empid ASC").find(:all)
-    csv_string = CSV.generate(:col_sep => " ") do |csv|        
+    csv_string = CSV.generate(:col_sep => "\t") do |csv|        
          csv << ["Empid", "First Name", "Last name","Contact No",'Address',"Email",'ELs','NELs','CompOffs','LOPs']
          @users.each do |user|
            csv << [user.empid, user.first_name, user.last_name,user.contact_no,user.address,user.email,number_to_human(user.leafe.els),number_to_human(user.leafe.nels),number_to_human(user.leafe.compoffs),number_to_human(user.leafe.lops)]
@@ -159,7 +169,10 @@ def export_to_csv
     
   time = Time.new
    send_data csv_string,:type => 'text/csv; charset=iso-8859-1; header=present',:disposition => "attachment; filename=employee#{time.strftime("%d-%m-%Y %I:%M:%S %p")}.csv" 
+=end
+
 end 
+
 
 
 

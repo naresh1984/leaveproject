@@ -39,6 +39,21 @@ end
 
 end
 
+def as_xls(options = {})
+  {
+      "Empid" => empid,
+      "Name" => first_name+" "+last_name,
+      "E-Mail" => email,
+      "Address" => address,
+      "Contact NO" => contact_no,
+      "ELs" => els,
+      "NELs" => nels,
+      "LOPs" => lops,
+      "COMPOFFs" => compoffs,
+	     
+    
+  }
+end
 
 
 
