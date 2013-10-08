@@ -35,7 +35,7 @@ gem "thin"
 gem 'will_paginate-bootstrap'
 #gem 'jquery-validation-rails'
 gem "spreadsheet"
-gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
+gem "to_xls"
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
