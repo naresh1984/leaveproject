@@ -155,7 +155,8 @@ def export_to_csv
 
  #raise @users.inspect 
  #raise @u.inspect  
-send_data @users.to_xls, content_type: 'application/vnd.ms-excel', filename: 'users.xls' 
+time = Time.new
+send_data @users.to_xls, content_type: 'application/vnd.ms-excel', filename: "Employesse#{time.strftime("%d-%m-%Y %I:%M:%S %p")}.xls" 
 
 
 =begin    
