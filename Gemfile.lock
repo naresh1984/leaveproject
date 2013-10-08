@@ -1,13 +1,5 @@
-GIT
-  remote: https://github.com/dblock/to_xls.git
-  revision: c7ef31174947b7b1459b0bb7bda3dd43f83aaa64
-  branch: to-xls-on-models
-  specs:
-    to_xls (1.0.0)
-      spreadsheet (> 0)
-      spreadsheet
-
 GEM
+
   remote: https://rubygems.org/
   specs:
     actionmailer (3.2.13)
@@ -123,6 +115,8 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
+    to_xls (1.5.2)
+      spreadsheet
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -151,6 +145,6 @@ DEPENDENCIES
   spreadsheet
   therubyracer
   thin
-  to_xls!
+  to_xls
   uglifier (>= 1.0.3)
   will_paginate-bootstrap
